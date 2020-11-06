@@ -3,8 +3,8 @@ import { shallow } from 'enzyme';
 import App from '../src/pages/index';
 
 describe('Hello world', () => {
-  it('App shows "Welcome toNext.js!" in a <h1> tag', () => {
+  it('App shows "Ola mundo" in a <h1> tag', () => {
     const app = shallow(<App />);
-    expect(app.find('h1').text()).toEqual('Welcome toNext.js!');
+    expect(app.find('div').text()).toEqual('Ola mundo');
   });
 });

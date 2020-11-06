@@ -36,7 +36,6 @@ yarn coverage
 ```
 to generate code coverage.
 
-
 ## Authors
 
 * **Thales de Oliveira** - *Colaborador* - [thalesdev](https://github.com/thalesdev)

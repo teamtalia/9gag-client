@@ -1,4 +1,5 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+[![codecov](https://codecov.io/gh/thalesdev/9gag-client/branch/master/graph/badge.svg?token=L9Z0TTF9KX)](https://codecov.io/gh/thalesdev/9gag-client)
+
 
 ## Getting Started
 

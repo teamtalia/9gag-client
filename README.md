@@ -9,7 +9,9 @@
 
 <div align="center">
 
-[![codecov](https://codecov.io/gh/teamtalia/9gag-client/branch/main/graph/badge.svg?token=YZ27NUQRRB)](https://codecov.io/gh/teamtalia/9gag-client)
+<a href="https://codecov.io/gh/teamtalia/9gag-client">
+  <img src="https://codecov.io/gh/teamtalia/9gag-client/branch/master/graph/badge.svg?token=YZ27NUQRRB"/>
+</a>
 
 </div>
 

@@ -8,7 +8,8 @@
     "start": "next start",
     "test": "jest --watch",
     "coverage": "jest --coverage",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "lint": "eslint src --ext ts,tsx"
   },
   "dependencies": {
     "axios": "^0.21.0",

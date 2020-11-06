@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/prop-types */
 import '../assets/styles/globals.css';
 
 function MyApp({ Component, pageProps }) {

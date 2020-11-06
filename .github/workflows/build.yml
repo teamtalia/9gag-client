@@ -45,7 +45,13 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Run testes
+      - name: Check linting
+        run: yarn lint
+      
+      - name: Check commit messages
+        uses: wagoid/commitlint-github-action@v2
+
+      - name: Check tests
         run: yarn coverage
 
       - name: Upload coverage

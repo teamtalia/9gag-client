@@ -79,7 +79,15 @@
   },
   "husky": {
     "hooks": {
+<<<<<<< HEAD
+<<<<<<< HEAD
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+=======
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+>>>>>>> 4cf17eb... fix: fix husky trigger on git commit messag
+=======
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+>>>>>>> ed0262f... fix: fix husky trigger on git commit message
     }
   },
   "config": {

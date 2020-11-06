@@ -1,38 +1,47 @@
+
+<br/><br/>
+<p align="center">
+  <img src="https://ik.imagekit.io/talia/github/9gag-icon_dV-Opsz5z.png" height="150" width="175" alt="Unform" />
+</p>
+<h3 align="center">
+  Go Fun Yourself 👍
+</h3>
+
 <div align="center">
 
 [![codecov](https://codecov.io/gh/teamtalia/9gag-client/branch/main/graph/badge.svg?token=YZ27NUQRRB)](https://codecov.io/gh/teamtalia/9gag-client)
 
 </div>
 
-<p align="center">
-  [Optional Text](../master/.github/assets/logo.png)
-</p>
+## Overview
+9GAG clone made by students from the Federal University of Rio Grande (FURG) in order to practice nodejs, react and react native.
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
+## Setup
+### Installation
+```
+yarn install
 yarn dev
 ```
+### Build
+```
+yarn build
+```
+### Test
+```
+yarn test
+```
+or 
+```
+yarn coverage
+```
+to generate code coverage.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Authors
 
-## Learn More
+* **Thales de Oliveira** - *Colaborador* - [thalesdev](https://github.com/thalesdev)
 
-To learn more about Next.js, take a look at the following resources:
+See the list of all project collaborators [Collaborators](https://github.com/orgs/teamtalia/people).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+This project is licensed under the MIT license - see [LICENSE.md](LICENSE.md) for more details.

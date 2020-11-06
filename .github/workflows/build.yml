@@ -46,7 +46,7 @@ jobs:
         run: yarn
 
       - name: Run testes
-        run: yarn test --coverage
+        run: yarn coverage
 
       - name: Upload coverage
         env:

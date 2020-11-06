@@ -1,5 +1,12 @@
-[![codecov](https://codecov.io/gh/thalesdev/9gag-client/branch/master/graph/badge.svg?token=L9Z0TTF9KX)](https://codecov.io/gh/thalesdev/9gag-client)
+<div align="center">
 
+[![codecov](https://codecov.io/gh/teamtalia/9gag-client/branch/main/graph/badge.svg?token=YZ27NUQRRB)](https://codecov.io/gh/teamtalia/9gag-client)
+
+</div>
+
+<p align="center">
+  [Optional Text](../master/.github/assets/logo.png)
+</p>
 
 ## Getting Started
 

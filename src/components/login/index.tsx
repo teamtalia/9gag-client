@@ -13,19 +13,16 @@ import {
 } from './styles';
 
 const Login: React.FC = () => {
-  function Facebook() {}
-  function Google() {}
-  function FunctionLogin() {}
   return (
     <Container>
       <h2>Log in</h2>
       <p>Connect with a social network</p>
       <DivBotoes>
-        <BotaoFB onClick={Facebook}>
+        <BotaoFB>
           <AiFillFacebook size="30" />
           Facebook
         </BotaoFB>
-        <BotaoG onClick={Google()}>
+        <BotaoG>
           <FcGoogle size="30" />
           Google
         </BotaoG>
@@ -46,7 +43,7 @@ const Login: React.FC = () => {
         </DivInput>
       </form>
       <DivBotoes>
-        <BotaoLogin onClick={FunctionLogin}>Log in</BotaoLogin>
+        <BotaoLogin>Log in</BotaoLogin>
         <a href="#esqueceu">Forgot password</a>
       </DivBotoes>
       <h3>Get Θαλία app</h3>

@@ -1,19 +1,13 @@
 import React from 'react';
-import { FaHome } from 'react-icons/fa';
-import { Container, MeuSpan } from './styles';
+import { Container } from './styles';
 
-// import { Container } from './styles';
+interface ButtonProps {
+  onClick: VoidFunction;
+  children: any;
+}
 
-const Button: React.FC = () => {
-  return (
-    <Container>
-      <MeuSpan>
-        Meu botao
-        <a href="http://teste">alo</a>
-      </MeuSpan>
-      <FaHome />
-    </Container>
-  );
+const Button: React.FC<ButtonProps> = ({ children, onClick }) => {
+  return <Container onClick={onClick}>{children}</Container>;
 };
 
 export default Button;

@@ -53,7 +53,9 @@
     "camelcase": "off",
     "@typescript-eslint/ban-types": "off",
     "react/react-in-jsx-scope": "off",
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/prop-types": "off",
+    "react/jsx-props-no-spreading": "off"
   },
   "settings": {
     "import/resolver": {

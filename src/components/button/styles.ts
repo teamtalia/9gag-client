@@ -1,22 +1,21 @@
 import styled from 'styled-components';
 
 export const Container = styled.button`
-  background-color: #333;
+  margin: 0 5px;
+  background-color: ${({ theme }) => theme.primaryColor};
   border: 0;
   padding: 15px;
   border-radius: 2px;
-  color: white;
+  color: ${({ theme }) => theme.primaryTextColor};
   font-size: 22pt;
+  cursor: pointer;
   svg {
     margin-top: 5px;
   }
-`;
-
-export const MeuSpan = styled.span`
-  margin-right: 5px;
-  a {
-    color: red;
-    i {
-    }
+  span {
+    margin-right: 5px;
+  }
+  &:hover {
+    background-color: ${({ theme }) => theme.primaryDarkColor};
   }
 `;

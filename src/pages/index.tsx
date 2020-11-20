@@ -31,7 +31,6 @@ const Home: React.FC = () => {
         {/* <Login /> */}
         <Upload />
       </ThemeProvider>
-      {/* <Login /> */}
     </AppContext.Provider>
   );
 };

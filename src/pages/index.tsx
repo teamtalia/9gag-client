@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import useTheme, { UseThemeResponse } from '../hooks/useTheme';
 import { GlobalStyle } from '../themes/GlobalStyle';
 import Button from '../components/button';
+import Login from '../components/login';
 
 interface AppContextInterface extends Omit<UseThemeResponse, 'theme'> {
   foo?: string;
@@ -26,6 +27,7 @@ const Home: React.FC = () => {
         <GlobalStyle />
         <Button onClick={() => setTheme('Dark')}>Dark Mode</Button>
         <Button onClick={() => setTheme('Light')}>Light Mode</Button>
+        {/* <Login /> */}
       </ThemeProvider>
       {/* <Login /> */}
     </AppContext.Provider>

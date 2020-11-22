@@ -6,7 +6,6 @@ import Button from '../components/button';
 // import Login from '../components/login';
 import Upload from '../components/upload';
 
-
 interface AppContextInterface extends Omit<UseThemeResponse, 'theme'> {
   foo?: string;
 }

@@ -1,17 +1,37 @@
-import React from 'react';
+import React, { createContext } from 'react';
+import { ThemeProvider } from 'styled-components';
+import useTheme, { UseThemeResponse } from '../hooks/useTheme';
 import { GlobalStyle } from '../themes/GlobalStyle';
-import Login from '../components/login';
 import Button from '../components/button';
-// import Head from 'next/head';
-// import styles from '../assets/styles/Home.module.css';
+// import Login from '../components/login';
+import Upload from '../components/upload';
 
-export default function Home() {
-  return (
-    <>
-      <div>Ola mundo</div>
-      <GlobalStyle />
-      <Button />
-      {/* <Login /> */}
-    </>
-  );
+interface AppContextInterface extends Omit<UseThemeResponse, 'theme'> {
+  foo?: string;
 }
+
+export const AppContext = createContext<AppContextInterface>({
+  setTheme: null,
+});
+
+const Home: React.FC = () => {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <AppContext.Provider
+      value={{
+        setTheme,
+      }}
+    >
+      <ThemeProvider theme={theme}>
+        <div>Ola mundo</div>
+        <GlobalStyle />
+        <Button onClick={() => setTheme('Dark')}>Dark Mode</Button>
+        <Button onClick={() => setTheme('Light')}>Light Mode</Button>
+        <Upload />
+      </ThemeProvider>
+    </AppContext.Provider>
+  );
+};
+
+export default Home;

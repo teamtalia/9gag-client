@@ -1,8 +1,9 @@
+/* eslint-disable prettier/prettier */
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 460px;
-  height: 588px;
+  padding: 30px;
+  background-color: ${({ theme }) => theme.primaryColor};
   div {
     display: flex;
     justify-content: space-between;
@@ -13,9 +14,11 @@ export const Container = styled.div`
   h2 {
     font-size: 36px;
     margin-bottom: 10px;
+    color: ${({ theme }) => theme.primaryTextColor};
   }
   h3 {
     text-align: center;
+    color: ${({ theme }) => theme.primaryTextColor};
   }
   p {
     margin-bottom: 20px;
@@ -32,7 +35,7 @@ export const Botao = styled.button`
   border: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   font-size: 20px;
   font-weight: 700;
   background-color: #09f;
@@ -44,6 +47,8 @@ export const Botao = styled.button`
   padding: 0px;
   border-radius: 2px;
   float: left;
+  cursor: pointer;
+  outline: none !important;
 `;
 
 export const BotaoFB = styled(Botao)`
@@ -59,29 +64,36 @@ export const BotaoLogin = styled(Botao)`
   width: 100px;
 `;
 export const DivInput = styled.div`
-  margin: auto;
+  margin: 2px auto;
   position: relative;
+  width: 100%;
   label {
-    display: block;
+    display: flex;
+    flex-direction: column;
     font-weight: 700;
+    width: 100%;
+    color: ${({ theme }) => theme.primaryTextColor} !important;
     input {
       font-size: 16px;
       line-height: 20px;
       padding: 9px;
       border-radius: 2px;
       display: block;
-      width: 440px;
-      border: 1px solid #ddd;
+      width: 100%;
+      border: 1px solid
+        ${({ theme }) =>
+    theme.name === 'dark' ? 'hsla(0,0%,100%,.2)' : '#ddd'};
+      outline: none;
+      background-color: transparent;
+      color: ${({ theme }) => theme.primaryTextColor};
     }
   }
 `;
-export const DivApp = styled.div`
+export const DivApp = styled.ul`
   justify-content: center !important;
-  margin-top: 0;
-  padding-top: 24px;
-  margin-bottom: 8px;
+  width: 100%;
+  padding: 24px 0;
   display: flex;
-  text-align: center;
   a {
     display: block;
     width: 143px;
@@ -91,24 +103,36 @@ export const DivApp = styled.div`
     border-radius: 2px;
     border: 1px solid #000;
   }
-  h3 {
-    text-align: center;
-    margin-bottom: 8px;
-    font-size: 16px;
-    line-height: 20px;
-  }
   li {
     float: none;
-    display: inline-block;
+    display: flex;
     margin-right: 10px;
-    text-align: center;
-    a {
-      color: #09f;
-      text-decoration: none;
-      background: #000;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 15px;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all ease-in-out 0.3s;
+    svg {
+      margin-right: 5px;
+    }
+    &:hover {
+      opacity: 0.7;
     }
   }
 `;
 export const DivBotoes = styled.div`
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+  display: flex;
+  align-items: center !important;
+  justify-content: space-between !important;
+  a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+  }
 `;

@@ -1,8 +1,9 @@
 import { DefaultTheme } from 'styled-components';
 
 const Light: DefaultTheme = {
+  name: 'light',
   bgColor: '#fbfbfb',
-  primaryColor: 'rgba(0,0,0,.06)',
+  primaryColor: '#ebebeb',
   primaryDarkColor: 'rgba(0,0,0,.5)',
   secondaryColor: '',
   secondaryDarkColor: '',

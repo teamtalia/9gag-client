@@ -1,12 +1,11 @@
 import React from 'react';
-
-import { Botao } from './styles';
+import NavBar from '../../components/navbar';
 
 const Foo: React.FC = () => {
   return (
-    <div>
-      <Botao>Blabla</Botao>
-    </div>
+    <>
+      <NavBar />
+    </>
   );
 };
 

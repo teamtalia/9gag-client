@@ -1,5 +1,5 @@
 import React from 'react';
-import { AiFillFacebook, AiOutlineApple } from 'react-icons/ai';
+import { AiFillApple, AiFillFacebook, AiOutlineApple } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { SiGoogleplay } from 'react-icons/si';
 import {
@@ -49,16 +49,12 @@ const Login: React.FC = () => {
       <h3>Get Θαλία app</h3>
       <DivApp>
         <li>
-          <a href="#IOS">
-            <AiOutlineApple />
-            Download on the Apple Store
-          </a>
+          <AiFillApple />
+          <span>Download on the Apple Storea</span>
         </li>
         <li>
-          <a href="#android">
-            <SiGoogleplay />
-            Get it on Google Play
-          </a>
+          <SiGoogleplay />
+          <span>Get it on Google Play</span>
         </li>
       </DivApp>
     </Container>

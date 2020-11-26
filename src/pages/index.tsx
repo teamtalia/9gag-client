@@ -5,8 +5,6 @@ const Home: React.FC = () => {
   return (
     <>
       <NavBar />
-      {/* <div>Ola mundo</div> */}
-      {/* <Upload /> */}
     </>
   );
 };

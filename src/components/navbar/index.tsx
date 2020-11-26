@@ -1,11 +1,13 @@
 import { Button } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import React, { useContext, useState } from 'react';
+import { AiOutlineClose } from 'react-icons/ai';
 import { BsMoon, BsSearch } from 'react-icons/bs';
 import { MdChatBubble } from 'react-icons/md';
 import { ThemeContext } from 'styled-components';
 import AppContext from '../../context/AppContext';
 import Login from '../login';
+import Signup from '../signup';
 import { Container, SetupNav, NavOption, NavRightContainer } from './styles';
 
 interface FakeCategories {
@@ -30,7 +32,7 @@ const categories: FakeCategories[] = [
   },
 ];
 
-interface ModalStateProps {
+export interface ModalStateProps {
   visible: boolean;
   title: string;
   component: any;
@@ -50,7 +52,14 @@ const NavBar: React.FC = () => {
     setModalState(state => ({
       ...state,
       visible: true,
-      component: () => <div />,
+      component: (mState, setMState) => (
+        <Signup
+          modal={{
+            modalState: mState,
+            setModalState: setMState,
+          }}
+        />
+      ),
     }));
   };
 
@@ -143,8 +152,11 @@ const NavBar: React.FC = () => {
           color: theme.primaryTextColor,
           padding: 24,
         }}
+        closeIcon={<AiOutlineClose color={theme.primaryTextColor} />}
+        destroyOnClose
       >
-        {modalState.component && modalState.component()}
+        {modalState.component &&
+          modalState.component(modalState, setModalState)}
       </Modal>
     </>
   );

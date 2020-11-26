@@ -110,7 +110,7 @@ const Signup: React.FC<SignupProps> = ({
           </label>
           <br />
           <ReCAPTCHA
-            sitekey="6Ldoz-4ZAAAAAD3NNm7c6VqyfrfMjDtlK6CkjDDs"
+            sitekey="6Lcz0u4ZAAAAAFLD5L0z7FGdA4ToQPblhcBBD1Ha"
             onChange={a => console.log(a)}
           />
           <br />

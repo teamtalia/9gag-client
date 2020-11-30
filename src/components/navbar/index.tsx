@@ -5,7 +5,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { BsMoon, BsSearch } from 'react-icons/bs';
 import { MdChatBubble } from 'react-icons/md';
 import { ThemeContext } from 'styled-components';
-import AppContext from '../../context/AppContext';
+import AppContext from '../../contexts/AppContext';
 import Login from '../login';
 import Signup from '../signup';
 import { Container, SetupNav, NavOption, NavRightContainer } from './styles';

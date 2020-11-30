@@ -6,7 +6,7 @@ import { Container } from './styles';
 const FullLoading: React.FC = () => {
   return (
     <Container>
-      <Image
+      <img
         src="/images/talia-icon-white.png"
         alt="Talia Logo"
         width={200}

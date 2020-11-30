@@ -19,15 +19,15 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <>
       <PreGlobalStyle />
-      <AppContext.Provider
-        value={{
-          setTheme,
-          ThemeSelector,
-          title,
-          setTitle,
-        }}
-      >
-        <AuthContextProvider>
+      <AuthContextProvider>
+        <AppContext.Provider
+          value={{
+            setTheme,
+            ThemeSelector,
+            title,
+            setTitle,
+          }}
+        >
           <ThemeProvider theme={theme}>
             <GlobalStyle />
             <Head>
@@ -35,8 +35,8 @@ const MyApp = ({ Component, pageProps }) => {
             </Head>
             <Component {...pageProps} />
           </ThemeProvider>
-        </AuthContextProvider>
-      </AppContext.Provider>
+        </AppContext.Provider>
+      </AuthContextProvider>
     </>
   );
 };

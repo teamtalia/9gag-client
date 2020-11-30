@@ -48,7 +48,7 @@ export const AuthContextProvider: React.FC = ({ children }) => {
       setUser(storageUser as UserProps);
       api.defaults.headers.Authorization = `Bearer ${storageToken}`;
     }
-    // setLoading(false);
+    setLoading(false);
   }, []);
 
   async function signIn({ email, password, thirdPartyToken }: SignInProps) {

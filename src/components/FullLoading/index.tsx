@@ -1,6 +1,5 @@
 import React from 'react';
 import { AiOutlineLoading } from 'react-icons/ai';
-import Image from 'next/image';
 import { Container } from './styles';
 
 const FullLoading: React.FC = () => {

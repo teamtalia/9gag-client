@@ -6,6 +6,7 @@ import { BsMoon, BsSearch } from 'react-icons/bs';
 import { MdChatBubble } from 'react-icons/md';
 import { ThemeContext } from 'styled-components';
 import AppContext from '../../contexts/AppContext';
+import useAuth from '../../hooks/useAuth';
 import Login from '../login';
 import Signup from '../signup';
 import { Container, SetupNav, NavOption, NavRightContainer } from './styles';
@@ -46,6 +47,7 @@ const NavBar: React.FC = () => {
     title: null,
     component: null,
   });
+  const { user, signed } = useAuth();
 
   const handleOpenSignUp = e => {
     e.preventDefault();
@@ -68,7 +70,14 @@ const NavBar: React.FC = () => {
     setModalState(state => ({
       ...state,
       visible: true,
-      component: () => <Login />,
+      component: (mState, setMState) => (
+        <Login
+          modal={{
+            modalState,
+            setModalState: setMState,
+          }}
+        />
+      ),
     }));
   };
 
@@ -122,20 +131,27 @@ const NavBar: React.FC = () => {
             <NavOption onlyIcon gray>
               <MdChatBubble size={18} />
             </NavOption>
-            <NavOption gray onClick={handleOpenLogin}>
-              Log in
-            </NavOption>
-            <Button
-              type="primary"
-              style={{
-                padding: '0 17px',
-                height: '27px',
-                marginLeft: '12px',
-              }}
-              onClick={handleOpenSignUp}
-            >
-              Sign Up
-            </Button>
+            {!signed && (
+              <NavOption gray onClick={handleOpenLogin}>
+                Log in
+              </NavOption>
+            )}
+            {signed && (
+              <NavOption gray>{`${user.fullname} (${user.email})`}</NavOption>
+            )}
+            {!signed && (
+              <Button
+                type="primary"
+                style={{
+                  padding: '0 17px',
+                  height: '27px',
+                  marginLeft: '12px',
+                }}
+                onClick={handleOpenSignUp}
+              >
+                Sign Up
+              </Button>
+            )}
           </NavRightContainer>
         </ul>
       </Container>

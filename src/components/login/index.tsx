@@ -1,7 +1,12 @@
+import { message } from 'antd';
 import React from 'react';
+import GoogleLogin from 'react-google-login';
 import { AiFillApple, AiFillFacebook, AiOutlineApple } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { SiGoogleplay } from 'react-icons/si';
+import { clientId } from '../../config/google';
+import useAuth from '../../hooks/useAuth';
+import { ModalStateProps } from '../navbar';
 import {
   DivApp,
   Container,
@@ -12,7 +17,31 @@ import {
   DivBotoes,
 } from './styles';
 
-const Login: React.FC = () => {
+interface ModalProps {
+  setModalState: any;
+  modalState: ModalStateProps;
+}
+interface LoginProps {
+  modal: ModalProps;
+}
+
+const Login: React.FC<LoginProps> = ({
+  modal: { modalState, setModalState },
+}) => {
+  const { signIn } = useAuth();
+  async function handleGoogleSignIn(res) {
+    const thirdPartyToken = res.getAuthResponse().id_token;
+    try {
+      await signIn({ thirdPartyToken });
+      setModalState(mState => ({
+        ...mState,
+        visible: false,
+      }));
+    } catch (err) {
+      message.error(err);
+    }
+  }
+
   return (
     <Container>
       <h2>Log in</h2>
@@ -22,10 +51,20 @@ const Login: React.FC = () => {
           <AiFillFacebook size="30" />
           Facebook
         </BotaoFB>
-        <BotaoG>
-          <FcGoogle size="30" />
-          Google
-        </BotaoG>
+        <GoogleLogin
+          clientId={clientId}
+          render={renderProps => (
+            <BotaoG
+              onClick={renderProps.onClick}
+              disabled={renderProps.disabled}
+            >
+              <FcGoogle size="30" />
+              Google
+            </BotaoG>
+          )}
+          onSuccess={handleGoogleSignIn}
+          cookiePolicy="single_host_origin"
+        />
       </DivBotoes>
       <form action="">
         <p>Log in whith your Email</p>

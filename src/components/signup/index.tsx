@@ -93,7 +93,9 @@ const Signup: React.FC<SignupProps> = ({
                   e.preventDefault();
                   setModalState(oldModalState => ({
                     ...oldModalState,
-                    component: () => <Login />,
+                    component: () => (
+                      <Login modal={{ setModalState, modalState }} />
+                    ),
                   }));
                 }}
               >

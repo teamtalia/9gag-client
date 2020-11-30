@@ -36,7 +36,7 @@ export const Botao = styled.button`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   background-color: #09f;
   color: #fff;
@@ -60,8 +60,10 @@ export const BotaoG = styled(Botao)`
 `;
 
 export const BotaoLogin = styled(Botao)`
-  height: 50px;
-  width: 100px;
+  height: auto;
+  width: auto;
+  padding: 6px 15px;
+  font-size:16px;
 `;
 export const DivInput = styled.div`
   margin: 2px auto;

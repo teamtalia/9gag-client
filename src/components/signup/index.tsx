@@ -1,14 +1,16 @@
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import React, { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-
+import GoogleLogin from 'react-google-login';
 import { AiFillFacebook } from 'react-icons/ai';
 import { FaApple, FaGooglePlay } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
+
 import Login from '../login';
 import { ModalStateProps } from '../navbar';
-
 import { ButtonsAppsContainer, ButtonsContainer, Container } from './styles';
+import { clientId } from '../../config/google';
+import useAuth from '../../hooks/useAuth';
 
 interface ModalProps {
   setModalState: any;
@@ -22,6 +24,23 @@ const Signup: React.FC<SignupProps> = ({
   modal: { setModalState, modalState },
 }) => {
   const [state, setStage] = useState(0);
+  const { signUp } = useAuth();
+
+  async function handleGoogleSignIn(res) {
+    const thirdPartyToken = res.getAuthResponse().id_token;
+    try {
+      await signUp({ thirdPartyToken });
+      setModalState(mState => ({
+        ...mState,
+        visible: false,
+      }));
+    } catch (err) {
+      message.error(err);
+    }
+  }
+  async function handleGoogleSignInError(err) {
+    console.log('err', err);
+  }
 
   return (
     <Container>
@@ -40,10 +59,23 @@ const Signup: React.FC<SignupProps> = ({
                 <AiFillFacebook size={40} />
                 <div>Facebook</div>
               </button>
-              <button type="button">
-                <FcGoogle size={26} type="google" />
-                <div>Google</div>
-              </button>
+              <GoogleLogin
+                clientId={clientId}
+                render={renderProps => (
+                  <button
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                    type="button"
+                  >
+                    <FcGoogle size={26} type="google" />
+                    <div>Google</div>
+                  </button>
+                )}
+                onSuccess={handleGoogleSignIn}
+                onFailure={handleGoogleSignInError}
+                onAutoLoadFinished={e => console.log(e)}
+                cookiePolicy="single_host_origin"
+              />
             </ButtonsContainer>
           </section>
           <section>

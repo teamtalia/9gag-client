@@ -47,7 +47,7 @@ const NavBar: React.FC = () => {
     title: null,
     component: null,
   });
-  const { user, signed } = useAuth();
+  const { user, signed, signOut } = useAuth();
 
   const handleOpenSignUp = e => {
     e.preventDefault();
@@ -80,6 +80,10 @@ const NavBar: React.FC = () => {
       ),
     }));
   };
+
+  async function handleLogout() {
+    await signOut();
+  }
 
   return (
     <>
@@ -137,7 +141,12 @@ const NavBar: React.FC = () => {
               </NavOption>
             )}
             {signed && (
-              <NavOption gray>{`${user.fullname} (${user.email})`}</NavOption>
+              <>
+                <NavOption gray>{`${user.fullname} (${user.email})`}</NavOption>
+                <NavOption gray onClick={handleLogout}>
+                  Logout
+                </NavOption>
+              </>
             )}
             {!signed && (
               <Button

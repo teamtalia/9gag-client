@@ -10,6 +10,8 @@ import {
   PasswordResetProps,
 } from '../services/auth';
 import api from '../services/api';
+import useLocalStorage from '../hooks/useLocalStorage';
+import FullLoading from '../components/FullLoading';
 
 interface UserProps {
   id: string;
@@ -33,24 +35,20 @@ export interface AuthContextProps {
 const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
 
 export const AuthContextProvider: React.FC = ({ children }) => {
+  const [storageUser, setStorageUser] = useLocalStorage('user', null);
+  const [storageToken, setStorageToken] = useLocalStorage('token', null);
+
   const [error, setError] = useState<string | null>(null);
   const [user, setUser] = useState<UserProps | null>(null);
   const [loading, setLoading] = useState(true);
   const [pending, setPeding] = useState(false);
 
   useEffect(() => {
-    async function loadData() {
-      // const { data: storageUser } = await getDataObject('user');
-      // const { data: storageToken } = await getDataString('token');
-
-      // if (!!storageUser && !!storageToken) {
-      //   setUser(storageUser as UserProps);
-      //   api.defaults.headers.Authorization = `Bearer ${storageToken}`;
-      // }
-
-      setLoading(false);
+    if (!!storageUser && !!storageToken) {
+      setUser(storageUser as UserProps);
+      api.defaults.headers.Authorization = `Bearer ${storageToken}`;
     }
-    loadData();
+    setLoading(false);
   }, []);
 
   async function signIn({ email, password, thirdPartyToken }: SignInProps) {
@@ -66,8 +64,8 @@ export const AuthContextProvider: React.FC = ({ children }) => {
       // injeta as credenciais do usuario pras proximas requests
       api.defaults.headers.Authorization = `Bearer ${token}`;
 
-      // await storeString('token', token);
-      // await storeObject('user', user);
+      setStorageToken(token);
+      setStorageUser(signedUser);
     }
     return apiError;
   }
@@ -77,6 +75,8 @@ export const AuthContextProvider: React.FC = ({ children }) => {
     // const isRemovedUser = await removeItem('user');
     setUser(null);
     setError(null);
+    setStorageToken(null);
+    setStorageUser(null);
     api.defaults.headers.Authorization = '';
     // return isRemovedToken && isRemovedUser;
     return true;
@@ -88,6 +88,7 @@ export const AuthContextProvider: React.FC = ({ children }) => {
     password,
     thirdPartyToken,
   }: SignUpProps) {
+    setPeding(true);
     const { error: errorSignUp } = await authSignUp({
       fullname,
       email,
@@ -103,6 +104,7 @@ export const AuthContextProvider: React.FC = ({ children }) => {
         thirdPartyToken,
       });
     }
+    setPeding(false);
     return errorSignUp;
   }
 
@@ -135,7 +137,7 @@ export const AuthContextProvider: React.FC = ({ children }) => {
     return { error: errorResetPassword, message };
   }
 
-  if (loading) return <div />;
+  if (loading) return <FullLoading />;
 
   return (
     <AuthContext.Provider

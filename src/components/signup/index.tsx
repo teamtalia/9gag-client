@@ -2,7 +2,7 @@ import { Button, message } from 'antd';
 import React, { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import GoogleLogin from 'react-google-login';
-import { AiFillFacebook } from 'react-icons/ai';
+import { AiFillFacebook, AiOutlineLoading } from 'react-icons/ai';
 import { FaApple, FaGooglePlay } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 
@@ -23,28 +23,52 @@ interface SignupProps {
 const Signup: React.FC<SignupProps> = ({
   modal: { setModalState, modalState },
 }) => {
-  const [state, setStage] = useState(0);
-  const { signUp } = useAuth();
+  const [stage, setStage] = useState(0);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [fullname, setFullname] = useState('');
+  const [captcha, setCaptcha] = useState('');
+  const { signUp, pending } = useAuth();
 
   async function handleGoogleSignIn(res) {
     const thirdPartyToken = res.getAuthResponse().id_token;
-    try {
-      await signUp({ thirdPartyToken });
+
+    const err = await signUp({ thirdPartyToken });
+    if (err) {
+      message.error(err);
+      return;
+    }
+    setModalState(mState => ({
+      ...mState,
+      visible: false,
+    }));
+
+    //
+  }
+  function handleGoogleSignInError(err) {
+    message.error(err);
+  }
+  async function handleSignUp() {
+    if (!captcha) {
+      message.error('You need to complete the captcha challenge');
+      return;
+    }
+    if (email && fullname && password) {
+      const err = await signUp({ email, password, fullname });
+      if (err) {
+        message.error(err);
+        return;
+      }
       setModalState(mState => ({
         ...mState,
         visible: false,
       }));
-    } catch (err) {
-      message.error(err);
     }
-  }
-  async function handleGoogleSignInError(err) {
-    console.log('err', err);
   }
 
   return (
     <Container>
-      {state === 0 && (
+      {stage === 0 && (
         <div>
           <h2>Hey there!</h2>
           <span>
@@ -126,29 +150,37 @@ const Signup: React.FC<SignupProps> = ({
           </section>
         </div>
       )}
-      {state === 1 && (
+      {stage === 1 && (
         <div>
           <h1>Become a member</h1>
           <label htmlFor="fullname">
             Full Name
-            <input type="text" name="fullname" />
+            <input type="text" onChange={e => setFullname(e.target.value)} />
           </label>
           <label htmlFor="email">
             Email
-            <input type="text" name="email" />
+            <input type="text" onChange={e => setEmail(e.target.value)} />
           </label>
 
           <label htmlFor="password">
             Password
-            <input type="password" name="password" />
+            <input
+              type="password"
+              onChange={e => setPassword(e.target.value)}
+            />
           </label>
           <br />
           <ReCAPTCHA
             sitekey="6Lcz0u4ZAAAAAFLD5L0z7FGdA4ToQPblhcBBD1Ha"
-            onChange={a => console.log(a)}
+            onChange={val => setCaptcha(val)}
           />
           <br />
-          <Button type="primary">Sign Up</Button>
+          <Button type="primary" onClick={handleSignUp}>
+            Sign Up
+            {pending && (
+              <AiOutlineLoading className="spin" style={{ marginLeft: 10 }} />
+            )}
+          </Button>
         </div>
       )}
     </Container>

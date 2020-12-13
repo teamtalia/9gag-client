@@ -1,6 +1,6 @@
 import { DefaultTheme } from 'styled-components';
-import Dark from './Dark';
-import Light from './Light';
+import dark from './Dark';
+import light from './Light';
 
 // Interface responsavel por todas variaveis de tema disponivel.
 export interface ThemeInterface {
@@ -11,20 +11,21 @@ export interface ThemeInterface {
   secondaryDarkColor: string;
   primaryTextColor: string;
   secondaryTextColor: string;
+  name: string;
 }
 
-export type ThemeType = 'Dark' | 'Light';
+export type ThemeType = 'dark' | 'light';
 
 interface ThemeGeneralInterface {
-  Dark: DefaultTheme;
-  Light?: DefaultTheme;
+  dark: DefaultTheme;
+  light?: DefaultTheme;
   default: ThemeType;
 }
 
 const Theme: ThemeGeneralInterface = {
-  Dark,
-  Light,
-  default: 'Dark',
+  dark,
+  light,
+  default: 'dark',
 };
 
 export default Theme;

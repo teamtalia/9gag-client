@@ -225,7 +225,7 @@ const Login: React.FC<LoginProps> = ({
           </DivInput>
           <DivInput>
             <label htmlFor="password">
-              password
+              Password
               <input
                 type="password"
                 name="password"
@@ -237,7 +237,7 @@ const Login: React.FC<LoginProps> = ({
             <label htmlFor="passwordConfirm">
               Password Confirm
               <input
-                type="passwordConfirm"
+                type="password"
                 name="passwordConfirm"
                 onChange={e => setPasswordConfirm(e.target.value)}
               />

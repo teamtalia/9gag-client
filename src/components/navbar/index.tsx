@@ -1,14 +1,18 @@
-import { Button } from 'antd';
+import { Button, Avatar } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import React, { useContext, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsMoon, BsSearch } from 'react-icons/bs';
+import { BiPlusMedical } from 'react-icons/bi';
 import { MdChatBubble } from 'react-icons/md';
 import { ThemeContext } from 'styled-components';
+
+import { UserOutlined } from '@ant-design/icons';
 import AppContext from '../../contexts/AppContext';
 import useAuth from '../../hooks/useAuth';
 import Login from '../login';
 import Signup from '../signup';
+import Upload from '../upload';
 import { Container, SetupNav, NavOption, NavRightContainer } from './styles';
 
 interface FakeCategories {
@@ -81,6 +85,22 @@ const NavBar: React.FC = () => {
     }));
   };
 
+  const handleOpenUpload = e => {
+    e.preventDefault();
+    setModalState(state => ({
+      ...state,
+      visible: true,
+      component: (mState, setMState) => (
+        <Upload
+          modal={{
+            modalState,
+            setModalState: setMState,
+          }}
+        />
+      ),
+    }));
+  };
+
   async function handleLogout() {
     await signOut();
   }
@@ -142,7 +162,25 @@ const NavBar: React.FC = () => {
             )}
             {signed && (
               <>
-                <NavOption gray>{`${user.fullname} (${user.email})`}</NavOption>
+                <NavOption gray>
+                  <Avatar size={28} icon={<UserOutlined />} />
+                </NavOption>
+                <Button
+                  type="primary"
+                  style={{
+                    padding: '0 17px',
+                    height: '27px',
+                    marginLeft: '12px',
+                  }}
+                  onClick={handleOpenUpload}
+                >
+                  <BiPlusMedical
+                    color="white"
+                    size={12}
+                    style={{ marginRight: 5 }}
+                  />
+                  Upload
+                </Button>
                 <NavOption gray onClick={handleLogout}>
                   Logout
                 </NavOption>

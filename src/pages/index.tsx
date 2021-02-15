@@ -1,15 +1,14 @@
 import React from 'react';
-import { GlobalStyle } from '../themes/GlobalStyle';
-import Login from '../components/login';
-// import Head from 'next/head';
-// import styles from '../assets/styles/Home.module.css';
+import Feed from '../components/feed';
+import NavBar from '../components/navbar';
 
-export default function Home() {
+const Home: React.FC = () => {
   return (
     <>
-      <div>Ola mundo</div>
-      <GlobalStyle />
-      <Login />
+      <NavBar />
+      <Feed />
     </>
   );
-}
+};
+
+export default Home;

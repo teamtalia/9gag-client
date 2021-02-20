@@ -78,7 +78,7 @@ const Upload: React.FC<UploadProps> = ({
   }
 
   const handleUpload = async () => {
-    if (!inputTags.length) {
+    if (typeof inputTags === 'undefined' || !inputTags.length) {
       message.error('The post must contain at least one tag');
       return;
     }

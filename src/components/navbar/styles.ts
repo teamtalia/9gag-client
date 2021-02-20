@@ -11,6 +11,7 @@ export const Container = styled.nav`
   padding: 0 80px;
   background: #000;
   position: fixed;
+  z-index: 999;
   top: 0;
   left: 0;
   height: 48px;

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import styled from 'styled-components';
 import { shade, lighten } from 'polished';
 import { Button, Menu } from 'antd';

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable prettier/prettier */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { message } from 'antd';
 import { getLocationOrigin } from 'next/dist/next-server/lib/utils';

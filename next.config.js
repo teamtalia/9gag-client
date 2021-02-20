@@ -1,3 +1,3 @@
 module.exports = {
-  tagert: 'serverless',
+  tagert: 'experimental-serverless-trace',
 }

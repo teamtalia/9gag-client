@@ -12,10 +12,11 @@ export const Container = styled.div`
   width: 640px;
 `;
 
-export const PostWrapper = styled.article`
+export const PostWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 24px;
+  padding-top:10px;
   &:not(:last-child) {
     // mudar pro primeiro child
     border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -32,6 +33,7 @@ export const PostContainer = styled.div`
   img {
     width: 100%;
     min-height: 280.435px;
+    max-height:500px;
   }
 `;
 
@@ -123,3 +125,4 @@ export const MoreActionsItem = styled(Menu.Item)`
     shade(0.08, theme.primaryColor)} !important;
   }
 `;
+//  && next export

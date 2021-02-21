@@ -5,6 +5,7 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import Head from 'next/head';
+import { Html } from 'next/document';
 import AppContext from '../contexts/AppContext';
 import useTheme from '../hooks/useTheme';
 import { GlobalStyle, PreGlobalStyle } from '../themes/GlobalStyle';
@@ -32,6 +33,7 @@ const MyApp = ({ Component, pageProps }) => {
             <GlobalStyle />
             <Head>
               <title>{title}</title>
+              <script type="text/javascript" src="/static/fb.js" />
             </Head>
             <Component {...pageProps} />
           </ThemeProvider>

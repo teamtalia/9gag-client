@@ -11,7 +11,7 @@ import {
 } from '../services/auth';
 import api from '../services/api';
 import useLocalStorage from '../hooks/useLocalStorage';
-import FullLoading from '../components/FullLoading';
+import FullLoading from '../components/fullloading';
 
 interface UserProps {
   id: string;
@@ -22,6 +22,7 @@ export interface AuthContextProps {
   signed: boolean;
   pending: boolean;
   user: UserProps;
+  token: string;
   error: string | null;
   signIn(arg0: SignInProps): Promise<string | undefined>;
   signUp(arg0: SignUpProps): Promise<string | undefined>;
@@ -151,6 +152,7 @@ export const AuthContextProvider: React.FC = ({ children }) => {
         sendResetPassword,
         resetPassword,
         pending,
+        token: storageToken,
       }}
     >
       {children}

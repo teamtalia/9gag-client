@@ -1,12 +1,8 @@
 import React from 'react';
-import NavBar from '../components/navbar';
+import Index from '../views/index';
 
 const Home: React.FC = () => {
-  return (
-    <>
-      <NavBar />
-    </>
-  );
+  return <Index />;
 };
 
 export default Home;

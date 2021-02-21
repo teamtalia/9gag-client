@@ -34,12 +34,12 @@ const MyApp = ({ Component, pageProps }) => {
             <Head>
               <title>{title}</title>
               <script type="text/javascript" src="/static/fb.js" />
-              <script
+              {/* <script
                 async
                 defer
                 crossOrigin="anonymous"
                 src="https://connect.facebook.net/en_US/sdk.js"
-              />
+              /> */}
             </Head>
             <Component {...pageProps} />
           </ThemeProvider>

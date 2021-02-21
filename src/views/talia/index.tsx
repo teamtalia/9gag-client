@@ -33,10 +33,6 @@ const Talia: React.FC<TaliaProps> = ({ post }) => {
     },
   );
 
-  useEffect(() => {
-    console.log('post from database', post);
-  }, [post]);
-
   return (
     <>
       <SEO

@@ -1,7 +1,7 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
 export const SetupNav = createGlobalStyle`
-  body, html {
+  body {
     padding-top: 48px;
   }
 `;

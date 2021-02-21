@@ -67,6 +67,7 @@ export const PostInteractions = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin-top: 15px;
+  width:500px;
   section {
     display: flex;
     flex-direction: row;

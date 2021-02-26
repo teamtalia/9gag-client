@@ -6,15 +6,19 @@ export const SetupNav = createGlobalStyle`
   }
 `;
 
-export const Container = styled.nav`
-  width: 100vw;
-  padding: 0 80px;
-  background: #000;
+export const Wrapper = styled.nav`
   position: fixed;
   z-index: 999;
   top: 0;
   left: 0;
-  height: 48px;
+  width: 100%;
+`;
+
+export const Container = styled.div`
+  width: 1196px;
+  background: #000;
+  margin: 0 auto;
+  min-height: 48px;
   display: flex;
   justify-content: flex-start;
   align-items: center;

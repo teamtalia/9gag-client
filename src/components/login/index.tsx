@@ -96,8 +96,8 @@ const Login: React.FC<LoginProps> = ({
     <Container>
       {stage === 0 && (
         <>
-          <h2>Log in</h2>
-          <p>Connect with a social network</p>
+          <h2>Entrar</h2>
+          <p>Conecte-se com uma Rede Social</p>
           <DivBotoes>
             <BotaoFB>
               <AiFillFacebook size="30" />
@@ -118,10 +118,10 @@ const Login: React.FC<LoginProps> = ({
               cookiePolicy="single_host_origin"
             />
           </DivBotoes>
-          <p>Log in whith your Email</p>
+          <p>Entrar usando seu E-mail</p>
           <DivInput>
             <label htmlFor="username">
-              Email
+              E-mail
               <input
                 type="text"
                 name="email"
@@ -131,7 +131,7 @@ const Login: React.FC<LoginProps> = ({
           </DivInput>
           <DivInput>
             <label htmlFor="password">
-              Password
+              Senha
               <input
                 type="password"
                 name="password"
@@ -141,7 +141,7 @@ const Login: React.FC<LoginProps> = ({
           </DivInput>
           <DivBotoes>
             <BotaoLogin onClick={handleLogin}>
-              Log in
+              Entrar
               {pending && <AiOutlineLoading className="spin" />}
             </BotaoLogin>
             <a
@@ -151,29 +151,29 @@ const Login: React.FC<LoginProps> = ({
                 setStage(1);
               }}
             >
-              Forgot password
+              Esqueci a Senha
             </a>
           </DivBotoes>
-          <h3>Get Θαλία app</h3>
+          <h3>Obter Θαλία App</h3>
           <DivApp>
             <li>
               <AiFillApple />
-              <span>Download on the Apple Storea</span>
+              <span>Baixar na Apple Store</span>
             </li>
             <li>
               <SiGoogleplay />
-              <span>Get it on Google Play</span>
+              <span>Baixar no Google Play</span>
             </li>
           </DivApp>
         </>
       )}
       {stage === 1 && (
         <>
-          <h2>Forgot Password</h2>
-          <p>{`Don't worry we will help you to recover your password `}</p>
+          <h2>Esqueci a Senha</h2>
+          <p>Não se preocupe, vamos ajudá-lo a recuperar sua senha</p>
           <DivInput>
             <label htmlFor="email">
-              email
+              E-mail
               <input
                 type="email"
                 name="email"
@@ -183,7 +183,7 @@ const Login: React.FC<LoginProps> = ({
           </DivInput>
           <DivBotoes>
             <BotaoLogin onClick={handleForgot}>
-              SEND ME INSTRUCTION
+              Me Enviar Instruções
               {pending && (
                 <AiOutlineLoading className="spin" style={{ marginLeft: 10 }} />
               )}
@@ -195,7 +195,7 @@ const Login: React.FC<LoginProps> = ({
                 setStage(2);
               }}
             >
-              I already have a code
+              Eu Já Recebi Um Código
             </a>
             <a
               href="#cancel"
@@ -204,18 +204,20 @@ const Login: React.FC<LoginProps> = ({
                 setStage(0);
               }}
             >
-              Cancel
+              Voltar
             </a>
           </DivBotoes>
         </>
       )}
       {stage === 2 && (
         <>
-          <h2>Reset Password</h2>
-          <p>An email with verification code has been sent to your email.</p>
+          <h2>Redefinir Senha</h2>
+          <p>
+            Um e-mail com o código de verificação foi enviado para o seu e-mail.
+          </p>
           <DivInput>
             <label htmlFor="Code">
-              Code
+              Código
               <input
                 type="Code"
                 name="Code"
@@ -225,7 +227,7 @@ const Login: React.FC<LoginProps> = ({
           </DivInput>
           <DivInput>
             <label htmlFor="password">
-              Password
+              Senha
               <input
                 type="password"
                 name="password"
@@ -235,7 +237,7 @@ const Login: React.FC<LoginProps> = ({
           </DivInput>
           <DivInput>
             <label htmlFor="passwordConfirm">
-              Password Confirm
+              Confirmação de Senha
               <input
                 type="password"
                 name="passwordConfirm"
@@ -245,7 +247,7 @@ const Login: React.FC<LoginProps> = ({
           </DivInput>
           <DivBotoes>
             <BotaoLogin onClick={handleReset}>
-              Reset Password
+              Redefinir Senha
               {pending && (
                 <AiOutlineLoading className="spin" style={{ marginLeft: 10 }} />
               )}
@@ -258,7 +260,7 @@ const Login: React.FC<LoginProps> = ({
                 setStage(1);
               }}
             >
-              Back
+              Voltar
             </a>
           </DivBotoes>
         </>

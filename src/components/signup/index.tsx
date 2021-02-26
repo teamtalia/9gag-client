@@ -50,7 +50,7 @@ const Signup: React.FC<SignupProps> = ({
   }
   async function handleSignUp() {
     if (!captcha) {
-      message.error('You need to complete the captcha challenge');
+      message.error('Você precisa completar o desafio do captcha');
       return;
     }
     if (email && fullname && password) {
@@ -70,12 +70,11 @@ const Signup: React.FC<SignupProps> = ({
     <Container>
       {stage === 0 && (
         <div>
-          <h2>Hey there!</h2>
+          <h2>Olá!</h2>
           <span>
             <b>Θαλία</b>
-            {` is your best source for fun. Share anything you find interesting,
-            get real responses from people all over the world, and discover what
-            makes you laugh.`}
+            {` é a sua melhor fonte de diversão. Compartilhe tudo que você achar interessante,
+             obtenha respostas reais de pessoas em todo o mundo e descubra o que o faz rir..`}
           </span>
           <section>
             <ButtonsContainer>
@@ -104,13 +103,13 @@ const Signup: React.FC<SignupProps> = ({
           </section>
           <section>
             <p>
-              {`Sign up with your `}
+              {`Inscreva-se com o seu `}
               <a href="#login/email" onClick={() => setStage(1)}>
-                Email
+                E-mail
               </a>
             </p>
             <p>
-              {`Have an account? `}
+              {`Tem uma conta? `}
               <a
                 href="#login"
                 onClick={e => {
@@ -123,26 +122,26 @@ const Signup: React.FC<SignupProps> = ({
                   }));
                 }}
               >
-                Log in
+                Entrar
               </a>
             </p>
           </section>
           <section data-bottom="no">
             <ButtonsAppsContainer>
-              <h3>Get Θαλία App</h3>
+              <h3>Baixar Θαλία App</h3>
             </ButtonsAppsContainer>
             <ButtonsContainer>
               <button type="button" data-mode="black">
                 <FaApple size={28} />
                 <div>
-                  <span>Download on</span>
+                  <span>Baixar na</span>
                   <span>Apple Store</span>
                 </div>
               </button>
               <button type="button" data-mode="black">
                 <FaGooglePlay size={26} />
                 <div>
-                  <span>Get It On</span>
+                  <span>Baixar no</span>
                   <span>Google Play</span>
                 </div>
               </button>
@@ -152,18 +151,18 @@ const Signup: React.FC<SignupProps> = ({
       )}
       {stage === 1 && (
         <div>
-          <h1>Become a member</h1>
+          <h1>Torne-se um membro</h1>
           <label htmlFor="fullname">
-            Full Name
+            Nome Completo
             <input type="text" onChange={e => setFullname(e.target.value)} />
           </label>
           <label htmlFor="email">
-            Email
+            E-mail
             <input type="text" onChange={e => setEmail(e.target.value)} />
           </label>
 
           <label htmlFor="password">
-            Password
+            Senha
             <input
               type="password"
               onChange={e => setPassword(e.target.value)}
@@ -173,10 +172,11 @@ const Signup: React.FC<SignupProps> = ({
           <ReCAPTCHA
             sitekey="6Lcz0u4ZAAAAAFLD5L0z7FGdA4ToQPblhcBBD1Ha"
             onChange={val => setCaptcha(val)}
+            hl="pt-BR"
           />
           <br />
           <Button type="primary" onClick={handleSignUp}>
-            Sign Up
+            Cadastro
             {pending && (
               <AiOutlineLoading className="spin" style={{ marginLeft: 10 }} />
             )}

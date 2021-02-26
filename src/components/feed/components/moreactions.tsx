@@ -21,7 +21,7 @@ const MoreActions: React.FC<MoreActionsProps> = ({ post }) => {
   const actions: ActionType[] = [
     {
       id: '0',
-      label: 'Copy Link',
+      label: 'Copiar Link',
       action: async () => {
         try {
           await navigator.clipboard.writeText(
@@ -35,7 +35,7 @@ const MoreActions: React.FC<MoreActionsProps> = ({ post }) => {
     },
     {
       id: '1',
-      label: 'Email',
+      label: 'E-mail',
       action: () => { },
     },
     {
@@ -45,22 +45,22 @@ const MoreActions: React.FC<MoreActionsProps> = ({ post }) => {
     },
     {
       id: '3',
-      label: 'Download',
+      label: 'Baixar',
       action: () => { },
     },
     {
       id: '4',
-      label: "I don't like this",
+      label: "Eu não gostei disso",
       action: () => { },
     },
     {
       id: '5',
-      label: "I've seen this",
+      label: "Eu vi isso",
       action: () => { },
     },
     {
       id: '6',
-      label: 'Reportt',
+      label: 'Reportar',
       action: () => { },
     },
   ];

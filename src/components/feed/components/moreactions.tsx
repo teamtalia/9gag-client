@@ -27,9 +27,9 @@ const MoreActions: React.FC<MoreActionsProps> = ({ post }) => {
           await navigator.clipboard.writeText(
             `${getLocationOrigin()}/talia/${post.id}`,
           );
-          message.success('Link Copied.');
+          message.success('Link copiado.');
         } catch (err) {
-          message.success('Error on copy link.');
+          message.success('Error ao copiar o link.');
         }
       },
     },

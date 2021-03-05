@@ -12,11 +12,11 @@ export const Wrapper = styled.nav`
   top: 0;
   left: 0;
   width: 100%;
+  background-color: #000;
 `;
 
 export const Container = styled.div`
   width: 1196px;
-  background: #000;
   margin: 0 auto;
   min-height: 48px;
   display: flex;

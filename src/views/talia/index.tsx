@@ -10,7 +10,7 @@ import NavBar from '../../components/navbar';
 import SideBar from '../../components/sidebar';
 import { Page } from '../index/styles';
 import Suggestions from '../../components/suggestions';
-import Post from '../../components/post';
+import Post, { PostInterface } from '../../components/post';
 
 interface PostReponse {
   id: string;
@@ -27,7 +27,7 @@ interface TaliaProps {
 const Talia: React.FC<TaliaProps> = ({ post }) => {
   const router = useRouter();
   const { id } = router.query;
-  const { data: postData } = useFetch<PostReponse>(
+  const { data: postData } = useFetch<PostInterface>(
     `/posts/${id}`,
     api,
     {},

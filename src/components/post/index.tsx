@@ -36,6 +36,10 @@ export interface PostInterface {
   };
   description: string;
 }
+
+interface HashProps {
+  comment_id?: string;
+}
 interface PostProps {
   post: PostInterface;
 }
@@ -70,7 +74,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
           [k]: v,
         }),
         {},
-      );
+      ) as HashProps;
     if (hash.comment_id) {
       setCommentToOpen(hash.comment_id);
     }

@@ -9,5 +9,6 @@ const Dark: DefaultTheme = {
   secondaryDarkColor: '',
   primaryTextColor: '#fff',
   secondaryTextColor: '',
+  isDark: true,
 };
 export default Dark;

@@ -109,7 +109,7 @@ const NavBar: React.FC = () => {
     <>
       <Container>
         <SetupNav />
-        <h1>Θαλία</h1>
+        <h1>ταλία</h1>
         <ul>
           <NavOption>
             <span role="img" aria-label="Shuffle">

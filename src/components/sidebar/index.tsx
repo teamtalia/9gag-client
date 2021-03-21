@@ -23,7 +23,7 @@ const SideBar: React.FC = () => {
           <li>
             <a href="#" className="selected">
               <FaHotjar size={16} />
-              <span>Hot</span>
+              <span>Em Alta</span>
             </a>
             <Dropdown overlay={Menu} trigger={['click']}>
               <a className="more" href="#">
@@ -34,14 +34,14 @@ const SideBar: React.FC = () => {
           <li>
             <a href="#">
               <BiTrendingUp size={16} />
-              <span>Trending</span>
+              <span>Tendência</span>
             </a>
           </li>
 
           <li>
             <a href="#">
               <HiOutlineClock size={16} />
-              <span>Fresh</span>
+              <span>Recente</span>
             </a>
           </li>
         </ul>
@@ -54,7 +54,7 @@ const SideBar: React.FC = () => {
           <li>
             <a href="#">
               <MdLocationOn size={16} />
-              <span>Brazil</span>
+              <span>Brasil</span>
             </a>
           </li>
         </ul>

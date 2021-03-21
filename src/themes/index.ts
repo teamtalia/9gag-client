@@ -12,6 +12,7 @@ export interface ThemeInterface {
   primaryTextColor: string;
   secondaryTextColor: string;
   name: string;
+  isDark: boolean;
 }
 
 export type ThemeType = 'dark' | 'light';

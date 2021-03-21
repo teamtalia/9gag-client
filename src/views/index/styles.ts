@@ -11,4 +11,5 @@ export const Page = styled.div`
   width: 972px;
   padding-top: 24px;
   margin: 0 0 32px 224px;
+  display: flex;
 `;

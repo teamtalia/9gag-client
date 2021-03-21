@@ -152,11 +152,13 @@ const Upload: React.FC<UploadProps> = ({
     <Container>
       {stage === 0 && (
         <Wrapper>
-          <h3>{inUpload ? 'Give your post a title' : 'Upload a Post'}</h3>
+          <h3>
+            {inUpload ? 'Dê um título à sua postagem' : 'Carregar uma postagem'}
+          </h3>
           <span>
             {inUpload
-              ? 'An accurate, descriptive title can help people discover your post.'
-              : 'Choose how you want to upload the post'}
+              ? 'Um título preciso e descritivo pode ajudar as pessoas a descobrirem sua postagem.'
+              : 'Escolha como deseja fazer o upload da postagem'}
           </span>
           <UploadSection disableHover={inUpload}>
             <div style={{ display: inUpload ? 'none' : 'block' }}>
@@ -164,9 +166,11 @@ const Upload: React.FC<UploadProps> = ({
                 <p className="ant-upload-drag-icon">
                   <BsUpload size={48} />
                 </p>
-                <p className="ant-upload-text">Drop image to upload or</p>
+                <p className="ant-upload-text">
+                  Solte a imagem para fazer o envio ou
+                </p>
                 <p className="ant-upload-hint">
-                  <Button type="primary">Choose files...</Button>
+                  <Button type="primary">Escolher os arquivos...</Button>
                 </p>
               </Dragger>
             </div>
@@ -218,14 +222,14 @@ const Upload: React.FC<UploadProps> = ({
                   </span>
                 </PostSection>
                 <PostSection>
-                  <span>This is sensitive</span>
+                  <span>Isso é sensível</span>
                   <input
                     type="checkbox"
                     onChange={() => setSensitive(b => !b)}
                   />
                 </PostSection>
                 <PostSection>
-                  <span>Attribute original poster</span>
+                  <span>Atribuir postagem original</span>
                   <input
                     type="checkbox"
                     onChange={() => setIsAttributed(b => !b)}
@@ -251,10 +255,10 @@ const Upload: React.FC<UploadProps> = ({
                   // reset
                 }}
               >
-                Back
+                Voltar
               </Button>
               <Button type="primary" onClick={handleUpload}>
-                Next
+                Avançar
               </Button>
             </Row>
           )}
@@ -262,10 +266,10 @@ const Upload: React.FC<UploadProps> = ({
             <Row>
               <UploadSection>
                 <IoMdImage size={42} />
-                <span>Paste image URL</span>
+                <span>Colar URL da imagem</span>
               </UploadSection>
               <Popover
-                content={<div>Available on iOS &#38; Android only.</div>}
+                content={<div>Disponivel no iOS &#38; Android apenas.</div>}
                 style={{
                   backgroundColor: theme.primaryColor,
                   color: theme.primaryTextColor,
@@ -277,7 +281,7 @@ const Upload: React.FC<UploadProps> = ({
                   }}
                 >
                   <AiFillPlayCircle size={42} />
-                  <span>Paste Video URL</span>
+                  <span>Colar URL do vídeo</span>
                 </UploadSection>
               </Popover>
               <UploadSection
@@ -289,7 +293,7 @@ const Upload: React.FC<UploadProps> = ({
                 }}
               >
                 <AiFillEdit size={42} />
-                <span>Make meme</span>
+                <span>Fazer um Meme</span>
               </UploadSection>
             </Row>
           )}

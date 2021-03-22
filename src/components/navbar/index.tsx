@@ -201,7 +201,7 @@ const NavBar: React.FC = () => {
                 }}
                 onClick={handleOpenSignUp}
               >
-                Cadastro
+                Inscreva-se
               </Button>
             )}
           </NavRightContainer>

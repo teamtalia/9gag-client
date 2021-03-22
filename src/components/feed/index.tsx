@@ -56,9 +56,9 @@ const Feed: React.FC = () => {
             </Link>
           </PostContainer>
           <PostMeta>
-            <a href="#points">0 points</a>
+            <a href="#points">0 pontos</a>
             {' · '}
-            <a href="#comments">0 comments</a>
+            <a href="#comments">0 comentarios</a>
           </PostMeta>
 
           <PostInteractions>

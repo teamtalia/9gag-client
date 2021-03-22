@@ -1,19 +1,24 @@
-import { Button, Avatar } from 'antd';
-import Modal from 'antd/lib/modal/Modal';
 import React, { useContext, useState } from 'react';
+import { Button, Avatar, Modal } from 'antd';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsMoon, BsSearch } from 'react-icons/bs';
 import { BiPlusMedical } from 'react-icons/bi';
 import { MdChatBubble } from 'react-icons/md';
 import { ThemeContext } from 'styled-components';
-
 import { UserOutlined } from '@ant-design/icons';
+
 import AppContext from '../../contexts/AppContext';
 import useAuth from '../../hooks/useAuth';
 import Login from '../login';
 import Signup from '../signup';
 import Upload from '../upload';
-import { Container, SetupNav, NavOption, NavRightContainer } from './styles';
+import {
+  Container,
+  SetupNav,
+  NavOption,
+  NavRightContainer,
+  Wrapper,
+} from './styles';
 
 interface FakeCategories {
   name: string;
@@ -51,7 +56,7 @@ const NavBar: React.FC = () => {
     title: null,
     component: null,
   });
-  const { user, signed, signOut } = useAuth();
+  const { signed, signOut } = useAuth();
 
   const handleOpenSignUp = e => {
     e.preventDefault();
@@ -106,7 +111,7 @@ const NavBar: React.FC = () => {
   }
 
   return (
-    <>
+    <Wrapper>
       <Container>
         <SetupNav />
         <h1>ταλία</h1>
@@ -179,7 +184,7 @@ const NavBar: React.FC = () => {
                     size={12}
                     style={{ marginRight: 5 }}
                   />
-                  Upload
+                  Envio
                 </Button>
                 <NavOption gray onClick={handleLogout}>
                   Sair
@@ -221,7 +226,7 @@ const NavBar: React.FC = () => {
         {modalState.component &&
           modalState.component(modalState, setModalState)}
       </Modal>
-    </>
+    </Wrapper>
   );
 };
 

@@ -26,7 +26,10 @@ export const GlobalStyle = createGlobalStyle`
   :root {
     --primary-color: #000;
   }
-  body {
+  body,
+  html,
+  .__next {
+    width: 100%;
     background-color: ${props => props.theme.bgColor};
     color: ${({ theme }) => theme.primaryTextColor};
   }

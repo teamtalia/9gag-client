@@ -30,15 +30,15 @@ const categories: FakeCategories[] = [
     name: 'Among Us',
   },
   {
-    name: 'Shower Thoughts',
+    name: 'Banho de Pensamentos',
     notify: true,
   },
   {
-    name: 'Motorbike',
+    name: 'Moto',
     notify: true,
   },
   {
-    name: 'Feels Bar',
+    name: 'Conversa de Bar',
   },
 ];
 
@@ -120,19 +120,19 @@ const NavBar: React.FC = () => {
             <span role="img" aria-label="Shuffle">
               🔀
             </span>
-            Shuffle
+            Aleatório
           </NavOption>
           <NavOption>
             <span role="img" aria-label="Mobile App">
               📱
             </span>
-            Get App
+            Baixe o App
           </NavOption>
           <NavOption>
             <span role="img" aria-label="Mobile App">
               🛒
             </span>
-            Shop
+            Loja
           </NavOption>
           {categories.map(category => (
             <NavOption key={category.name} notify={category.notify}>
@@ -201,7 +201,7 @@ const NavBar: React.FC = () => {
                 }}
                 onClick={handleOpenSignUp}
               >
-                Cadastro
+                Inscreva-se
               </Button>
             )}
           </NavRightContainer>

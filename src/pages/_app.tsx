@@ -15,7 +15,7 @@ import { AuthContextProvider } from '../contexts/AuthContext';
 const MyApp = ({ Component, pageProps }) => {
   const { theme, setTheme } = useTheme();
   const ThemeSelector = (dark, light) => (theme.name === 'dark' ? dark : light);
-  const [title, setTitle] = useState<string>('Θαλία - Go Fun The World');
+  const [title, setTitle] = useState<string>('ταλία - Go Fun The World');
 
   return (
     <>

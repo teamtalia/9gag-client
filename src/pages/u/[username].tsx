@@ -6,10 +6,8 @@ import UserView from '../../views/u';
 
 const User: React.FC = () => {
   const router = useRouter();
-  const {username}= router.query;
-  return (
-    <UserView username={username}/>
-    );
-}
+  const { username } = router.query;
+  return <UserView username="username" />;
+};
 
 export default User;

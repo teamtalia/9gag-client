@@ -13,10 +13,11 @@ interface UserViewProps {
 }
 
 const UserView: React.FC<UserViewProps> = ({ username }) => {
-
   const user = {
     username: 'username',
-    avatar: { location: 'https://accounts-cdn.9gag.com/media/avatar/57982524_100_1.jpg' },
+    avatar: {
+      location: 'https://accounts-cdn.9gag.com/media/avatar/57982524_100_1.jpg',
+    },
   };
 
   return (
@@ -34,7 +35,6 @@ const UserView: React.FC<UserViewProps> = ({ username }) => {
           <Wrapper>
             <Header>
               <img src={user.avatar.location} alt="foto de perfil" />
-
             </Header>
             {username}
           </Wrapper>
@@ -43,6 +43,6 @@ const UserView: React.FC<UserViewProps> = ({ username }) => {
       </Container>
     </>
   );
-}
+};
 
 export default UserView;

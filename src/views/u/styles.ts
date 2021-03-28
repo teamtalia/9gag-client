@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
   margin-bottom: 100px;
 `;
 export const Header = styled.header`
-  display:flex;
+  display: flex;
   align-items: center;
   margin-bottom: 12px;
   img {

@@ -42,7 +42,7 @@ const Talia: React.FC<TaliaProps> = ({ post }) => {
     <>
       <SEO
         description={postData.description}
-        title="Θαλία - Go Fun The World"
+        title="Θαλία - Venha se divertir!"
         image={postData.file.location}
         url={`${getLocationOrigin()}/talia/${postData.id}`}
       />

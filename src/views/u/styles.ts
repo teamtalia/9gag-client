@@ -21,7 +21,7 @@ export const Header = styled.header`
   display: flex;
   align-items: flex-start;
   margin-bottom: 12px;
-  img {
+  figure {
     width: 80px;
     height: 80px;
     background-color: rgba(0, 0, 0, 0.1);
@@ -29,6 +29,13 @@ export const Header = styled.header`
     margin-right: 16px;
     flex-shrink: 0;
     border-radius: 50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
   h2 {
     color: ${({ theme }) => theme.primaryTextColor};

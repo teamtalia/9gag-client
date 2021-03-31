@@ -10,7 +10,7 @@ import NavBar from '../../components/navbar';
 import SideBar from '../../components/sidebar';
 import { Page } from '../index/styles';
 import Suggestions from '../../components/suggestions';
-import Post, { PostInterface } from '../../components/post';
+import Post, { PostInterface } from '../../components/section-post';
 
 interface PostReponse {
   id: string;

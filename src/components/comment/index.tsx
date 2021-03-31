@@ -13,7 +13,7 @@ import { TiArrowSortedUp, TiArrowSortedDown } from 'react-icons/ti';
 import { mutate } from 'swr';
 import TimeAgo from 'react-timeago';
 import brStrings from 'react-timeago/lib/language-strings/pt-br-short';
-import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
+import buildFormatter from 'react-lib/formatters/buildFormatter';
 import { Dropdown, message } from 'antd';
 
 import { getLocationOrigin } from 'next/dist/next-server/lib/utils';
@@ -29,7 +29,7 @@ import {
   DropdownMenu,
   DropdownMenuItem,
 } from './styles';
-import { PostInterface } from '../post';
+import { PostInterface } from '../section-post';
 import api from '../../services/api';
 import DoComment from '../docomment';
 import useAuth from '../../hooks/useAuth';

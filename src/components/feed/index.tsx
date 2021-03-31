@@ -10,6 +10,9 @@ import {
   UpOutlined,
 } from '@ant-design/icons';
 import { getLocationOrigin } from 'next/dist/next-server/lib/utils';
+import TimeAgo from 'react-timeago';
+import brStrings from 'react-timeago/lib/language-strings/pt-br-short';
+import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
 import api from '../../services/api';
 import useFetch from '../../hooks/useFetch';
 import {
@@ -24,24 +27,26 @@ import {
 } from './styles';
 import MoreActions from './components/moreactions';
 
-interface PostsReponse {
+interface PostProps {
   posts: any[];
 }
 
-const Feed: React.FC = () => {
-  const { data: postData } = useFetch<PostsReponse>('/posts', api, {});
-  const posts = useMemo(() => {
-    if (postData) {
-      return postData.posts;
-    }
-    return [];
-  }, [postData]);
+const formatter = buildFormatter(brStrings);
 
+const Feed: React.FC<PostProps> = ({ posts }) => {
   return (
     <Container>
       {posts.map(post => (
         <PostWrapper key={post.id}>
           <PostHeader>
+            <section>
+              <span />
+              <span>WTF</span>
+              <span>
+                <TimeAgo date={post.createdAt} formatter={formatter} />
+              </span>
+              {post.reason && <span>{post.reason}</span>}
+            </section>
             <Link href={`/talia/${post.id}`}>
               <a>
                 <h1>{post.description}</h1>

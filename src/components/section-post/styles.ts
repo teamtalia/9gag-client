@@ -1,34 +1,38 @@
 /* eslint-disable prettier/prettier */
-import styled from 'styled-components';
-import { shade, lighten } from 'polished';
 import { Button, Menu } from 'antd';
+import { lighten, shade } from 'polished';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
   float: left;
   width: 640px;
+  min-height: 100px;
+  margin-bottom: 100px;
 `;
 
-export const PostWrapper = styled.div`
+export const Header = styled.header`
+  width: 640px;
+  height: 80px;
   display: flex;
   flex-direction: column;
-  justify-content:center;
-  align-items:flex-start;
-  width: 640px;
-  margin-bottom: 24px;
-  padding-top:10px;
-  &:not(:last-child) {
-    // mudar pro primeiro child
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-color: hsla(0, 0%, 100%, 0.2);
+  h1 {
+    color: ${props => props.theme.primaryTextColor} !important;
+    text-transform: capitalize;
+    margin-bottom: 8px;
+  }
+  p {
+    a {
+      color: ${({ theme }) => shade(0.2, theme.primaryTextColor)} !important;
+    }
   }
 `;
 
 export const PostContainer = styled.div`
-  width: 500px;
+  width: 600px;
   position: relative;
   margin-bottom: 8px;
 
@@ -36,57 +40,7 @@ export const PostContainer = styled.div`
   img {
     width: 100%;
     min-height: 280.435px;
-    max-height:500px;
-  }
-`;
-
-export const PostHeader = styled.div`
-  h1 {
-    transition: color 0.3 ease-in-out;
-    color: ${({ theme }) => theme.primaryTextColor};
-    text-transform: capitalize;
-    :hover {
-      color: #09f;
-    }
-  }
-  section {
-    height: 20px;
-    color: #999;
-    font-size: 12px;
-    margin-bottom: 8px;
-    display:flex;
-    align-items:center;
-    justify-content:stretch;
-    span {
-      display: flex;
-      margin-right: 8px;
-      height:100%;
-      width: auto;
-      position: relative;
-      
-      &:not(:first-child, :last-child) {
-        &::after{
-          content: "·";
-          height: 100%;
-          width:2px;
-          right: -4px;
-          top:0;
-          position:absolute;
-          color:#999;
-        }
-      }
-    }
-  }
-`;
-
-export const PostMeta = styled.div`
-  margin-top: 2.5px;
-  a {
-    transition: color ease-in-out 0.3;
-    color: ${({ theme }) => shade(0.2, theme.primaryTextColor)};
-    &:hover {
-      color: ${({ theme }) => shade(0.6, theme.primaryTextColor)};
-    }
+    max-height: 500px;
   }
 `;
 
@@ -94,12 +48,20 @@ export const PostInteractions = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 15px;
-  width:500px;
+  margin-top: 5px;
+  width: 500px;
+  margin-bottom: 15px;
   section {
     display: flex;
     flex-direction: row;
     justify-content: stretch;
+    > *:not(:first-child) {
+      margin: 0 5px;
+    }
+    > *:is(:first-child) {
+      margin: 0;
+      margin-right: 5px;
+    }
   }
 `;
 
@@ -157,4 +119,46 @@ export const MoreActionsItem = styled(Menu.Item)`
     shade(0.08, theme.primaryColor)} !important;
   }
 `;
-//  && next export
+
+export const CommentsHeader = styled.header`
+  height: 40px;
+  width: 100%;
+  margin-top: 20px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.5px solid
+    ${({ theme }) => (theme.name === 'dark' ? '#333' : '#e5e5e5')};
+
+  section {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+
+    span {
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 19px;
+      letter-spacing: 0em;
+    }
+    a {
+      display: flex;
+      border-bottom: 2px solid transparent;
+      padding: 0 12px;
+      height: 100%;
+      align-items: center;
+      color: #999;
+      font-weight: bold;
+
+      &.active,
+      &:hover {
+        color: ${({ theme }) => theme.primaryTextColor};
+        border-bottom-color: ${({ theme }) =>
+    theme.name === 'dark' ? '#fff' : '#000'};
+      }
+    }
+  }
+`;

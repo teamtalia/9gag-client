@@ -13,7 +13,7 @@ import { TiArrowSortedUp, TiArrowSortedDown } from 'react-icons/ti';
 import { mutate } from 'swr';
 import TimeAgo from 'react-timeago';
 import brStrings from 'react-timeago/lib/language-strings/pt-br-short';
-import buildFormatter from 'react-lib/formatters/buildFormatter';
+import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
 import { Dropdown, message } from 'antd';
 
 import { getLocationOrigin } from 'next/dist/next-server/lib/utils';

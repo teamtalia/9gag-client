@@ -42,12 +42,13 @@ interface HashProps {
 }
 interface PostProps {
   post: PostInterface;
+  reason?: string;
 }
 interface CommentsReponse {
   comments: any[];
 }
 
-const Post: React.FC<PostProps> = ({ post }) => {
+const Post: React.FC<PostProps> = ({ post, reason }) => {
   const [order, setOrder] = useState<'hot' | 'fresh'>('hot');
 
   const { data: commentData } = useFetch<CommentsReponse>(

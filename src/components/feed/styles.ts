@@ -49,6 +49,34 @@ export const PostHeader = styled.div`
       color: #09f;
     }
   }
+  section {
+    height: 20px;
+    color: #999;
+    font-size: 12px;
+    margin-bottom: 8px;
+    display:flex;
+    align-items:center;
+    justify-content:stretch;
+    span {
+      display: flex;
+      margin-right: 8px;
+      height:100%;
+      width: auto;
+      position: relative;
+      
+      &:not(:first-child, :last-child) {
+        &::after{
+          content: "·";
+          height: 100%;
+          width:2px;
+          right: -4px;
+          top:0;
+          position:absolute;
+          color:#999;
+        }
+      }
+    }
+  }
 `;
 
 export const PostMeta = styled.div`

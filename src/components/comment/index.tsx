@@ -29,7 +29,7 @@ import {
   DropdownMenu,
   DropdownMenuItem,
 } from './styles';
-import { PostInterface } from '../post';
+import { PostInterface } from '../section-post';
 import api from '../../services/api';
 import DoComment from '../docomment';
 import useAuth from '../../hooks/useAuth';

@@ -1,5 +1,8 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
+import useFetch from '../../hooks/useFetch';
+import UserSchema from '../../schemas/user';
+import api from '../../services/api';
 import UserView from '../../views/u';
 
 // import { Container } from './styles';
@@ -7,7 +10,19 @@ import UserView from '../../views/u';
 const User: React.FC = () => {
   const router = useRouter();
   const { username } = router.query;
-  return <UserView username="username" />;
+  const { data: user, error } = useFetch<UserSchema>(
+    username ? `/users/${username}` : null,
+    api,
+    {},
+  );
+  useEffect(() => console.log('alo', user), [user]);
+  if (!user) {
+    return <div />; // loading
+  }
+  if (error) {
+    return <div />; // 404
+  }
+  return <UserView user={user} />;
 };
 
 export default User;

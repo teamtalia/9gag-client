@@ -13,7 +13,7 @@ import { mutate } from 'swr';
 
 import { UploadFile } from 'antd/lib/upload/interface';
 import { AiOutlineLoading } from 'react-icons/ai';
-import { PostInterface } from '../post';
+import { PostInterface } from '../section-post';
 import api from '../../services/api';
 import useAuth from '../../hooks/useAuth';
 import { baseURL } from '../../config/constants';

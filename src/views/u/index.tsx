@@ -2,13 +2,20 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { Dropdown, Menu } from 'antd';
 import { getLocationOrigin } from 'next/dist/next-server/lib/utils';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineDash } from 'react-icons/ai';
+import TimeAgo from 'react-timeago';
+import brStrings from 'react-timeago/lib/language-strings/pt-br';
+import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
+
+import Avatar from 'antd/lib/avatar/avatar';
+import { UserOutlined } from '@ant-design/icons';
 import { Container, Page } from '../../components/layout';
 import NavBar from '../../components/navbar';
 import SEO from '../../components/seo';
 import SideBar from '../../components/sidebar';
 import Suggestions from '../../components/suggestions';
+import UserSchema from '../../schemas/user';
 import {
   Header,
   Wrapper,
@@ -16,37 +23,51 @@ import {
   MoreActionsContainer,
   MoreActionsItem,
 } from './styles';
+import useFetch from '../../hooks/useFetch';
+import api from '../../services/api';
+import Feed from '../../components/feed';
 
 // import { Container } from './styles';
 interface UserViewProps {
-  username: string;
+  user: UserSchema;
 }
+// home, postagens, comentarios, curtidos
+const endpoints = ['', 'my', 'comments', 'upvotes'];
 
-const UserView: React.FC<UserViewProps> = ({ username }) => {
-  const user = {
-    username: 'username',
-    avatar: {
-      location: 'https://accounts-cdn.9gag.com/media/avatar/57982524_100_1.jpg',
-    },
-  };
+const formatter = buildFormatter(brStrings);
 
+const UserView: React.FC<UserViewProps> = ({ user }) => {
   const [page, setPage] = useState(0);
+  const { data } = useFetch<{ posts: any[] }>(
+    `/perfil/${user.username}/posts/${endpoints[page]}`,
+    api,
+    {},
+  );
+
   const moreOptions = () => (
     <MoreActionsContainer>
       <MoreActionsItem key="1">Copiar link</MoreActionsItem>
-      <MoreActionsItem key="2">Bloquear @thayllordossan</MoreActionsItem>
-      <MoreActionsItem key="3">Reportar @thayllordossan</MoreActionsItem>
+      <MoreActionsItem key="2">{`Bloquear @${user.username}`}</MoreActionsItem>
+      <MoreActionsItem key="3">{`Reportar @${user.username}`}</MoreActionsItem>
     </MoreActionsContainer>
   );
 
   const activeClassHandle = id => (id === page ? 'active' : '');
+  // Feed posts;
+  // data.posts
+  useEffect(() => {
+    if (data) {
+      console.log('a pagina mudou:', page);
+      console.log('data', data);
+    }
+  }, [page, data]);
 
   return (
     <>
       <SEO
         description="Θαλία-  divirta-se vendo memes"
         title={`${user.username} - Θαλία`}
-        image={user.avatar.location}
+        image={user.avatar?.location}
         url={`${getLocationOrigin()}/u/${user.username}`}
       />
       <NavBar />
@@ -55,16 +76,24 @@ const UserView: React.FC<UserViewProps> = ({ username }) => {
         <Page>
           <Wrapper>
             <Header>
-              <img src={user.avatar.location} alt="foto de perfil" />
+              <figure>
+                {!user.avatar && <Avatar size={80} icon={<UserOutlined />} />}
+                {user.avatar && (
+                  <img src={user.avatar.location} alt="foto de perfil" />
+                )}
+              </figure>
+
               <header>
-                <h2>Thayllor Dos Santos</h2>
+                <h2 style={{ textTransform: 'capitalize' }}>{user.fullname}</h2>
                 <p>
-                  @thayllordossan
-                  <span>. 169days</span>
+                  {`@${user.username}`}
+                  <span>
+                    {` · `}
+                    <TimeAgo date={user.createdAt} formatter={formatter} />
+                  </span>
                 </p>
               </header>
             </Header>
-
             <section>My Funny Collection</section>
             <TabBar>
               <ul>
@@ -87,6 +116,10 @@ const UserView: React.FC<UserViewProps> = ({ username }) => {
                 </a>
               </Dropdown>
             </TabBar>
+            {page === 0 && <Feed posts={data ? data.posts : []} />}
+            {page === 1 && <span>postagens</span>}
+            {page === 2 && <span>comentados</span>}
+            {page === 3 && <span>curtidos</span>}
           </Wrapper>
           <Suggestions />
         </Page>

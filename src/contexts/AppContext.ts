@@ -6,13 +6,14 @@ interface AppContextInterface extends Omit<UseThemeResponse, 'theme'> {
   ThemeSelector: CallableFunction;
   title: string;
   setTitle: any;
+  feedOrder: any;
+  setFeedOrder: any;
+  feedRevalidate: any;
+  setFeedRevalidate: any;
 }
 
-const AppContext = createContext<AppContextInterface>({
-  setTheme: null,
-  ThemeSelector: null,
-  title: null,
-  setTitle: null,
-});
+const AppContext = createContext<AppContextInterface>(
+  ({} as unknown) as AppContextInterface,
+);
 
 export default AppContext;

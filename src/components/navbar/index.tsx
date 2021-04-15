@@ -7,6 +7,7 @@ import { MdChatBubble } from 'react-icons/md';
 import { ThemeContext } from 'styled-components';
 import { UserOutlined } from '@ant-design/icons';
 
+import Link from 'next/link';
 import AppContext from '../../contexts/AppContext';
 import useAuth from '../../hooks/useAuth';
 import Login from '../login';
@@ -114,7 +115,10 @@ const NavBar: React.FC = () => {
     <Wrapper>
       <Container>
         <SetupNav />
-        <h1>ταλία</h1>
+        <Link href="/">
+          <h1>ταλία</h1>
+        </Link>
+
         <ul>
           <NavOption>
             <span role="img" aria-label="Shuffle">

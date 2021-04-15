@@ -39,6 +39,7 @@ export const Container = styled.div`
     margin-right: 12px;
     color: white;
     margin-bottom: 0;
+    cursor: pointer;
   }
 `;
 

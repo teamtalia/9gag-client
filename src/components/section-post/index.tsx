@@ -12,7 +12,7 @@ import useFetch from '../../hooks/useFetch';
 import api from '../../services/api';
 import DoComment from '../docomment';
 import Comment from '../comment';
-import MoreActions from '../feed/components/moreactions';
+import MoreActions from '../post/components/moreactions';
 
 import {
   Container,

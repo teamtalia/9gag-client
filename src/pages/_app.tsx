@@ -11,11 +11,14 @@ import useTheme from '../hooks/useTheme';
 import { GlobalStyle, PreGlobalStyle } from '../themes/GlobalStyle';
 import 'antd/dist/antd.css';
 import { AuthContextProvider } from '../contexts/AuthContext';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const MyApp = ({ Component, pageProps }) => {
   const { theme, setTheme } = useTheme();
   const ThemeSelector = (dark, light) => (theme.name === 'dark' ? dark : light);
   const [title, setTitle] = useState<string>('ταλία - Go Fun The World');
+  const [feedOrder, setFeedOrder] = useLocalStorage('feed_order', 'hot');
+  const [feedRevalidate, setFeedRevalidate] = useState(false);
 
   return (
     <>
@@ -27,6 +30,10 @@ const MyApp = ({ Component, pageProps }) => {
             ThemeSelector,
             title,
             setTitle,
+            feedOrder,
+            setFeedOrder,
+            setFeedRevalidate,
+            feedRevalidate,
           }}
         >
           <ThemeProvider theme={theme}>

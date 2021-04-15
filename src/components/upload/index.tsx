@@ -50,6 +50,7 @@ const Upload: React.FC<UploadProps> = ({
       value: any;
     }>
   >();
+  const [externalLink, setExternalLink] = useState('');
   const { token } = useContext(AuthContext);
 
   const { data: tagsData, error } = useFetch<TagsResponse>('/tags', api, {});
@@ -138,15 +139,9 @@ const Upload: React.FC<UploadProps> = ({
         default:
           break;
       }
-
-      console.log(info);
     },
     showUploadList: false,
   };
-
-  useEffect(() => {
-    console.log(inputTags);
-  }, [inputTags]);
 
   return (
     <Container>
@@ -264,7 +259,7 @@ const Upload: React.FC<UploadProps> = ({
           )}
           {!inUpload && (
             <Row>
-              <UploadSection>
+              <UploadSection onClick={e => setStage(1)}>
                 <IoMdImage size={42} />
                 <span>Colar URL da imagem</span>
               </UploadSection>
@@ -296,6 +291,78 @@ const Upload: React.FC<UploadProps> = ({
                 <span>Fazer um Meme</span>
               </UploadSection>
             </Row>
+          )}
+        </Wrapper>
+      )}
+      {stage === 1 && (
+        <Wrapper>
+          <h3>Dê um título à sua postagem</h3>
+          <span>
+            Um título preciso e descritivo pode ajudar as pessoas a descobrirem
+            sua postagem.
+          </span>
+
+          <PostSection>
+            <figure>
+              {!uploadImage && (
+                <AiOutlineLoading
+                  className="spin"
+                  style={{ margin: 20 }}
+                  size={48}
+                />
+              )}
+              {uploadImage && (
+                <img src={uploadImage.response.location} alt="Post" />
+              )}
+            </figure>
+            <div>
+              <textarea
+                placeholder="Describe your post..."
+                onChange={e => {
+                  setCountCharaters(e.target.value.length);
+                  setDescription(e.target.value);
+                }}
+                maxLength={MAX_CHARACTERS}
+              />
+              <span>{MAX_CHARACTERS - countCharacters}</span>
+            </div>
+          </PostSection>
+          <PostSection>
+            <span>Tag</span>
+            <span style={{ flex: 1, flexShrink: 0 }}>
+              <Select
+                options={tags}
+                isMulti
+                classNamePrefix="select"
+                placeholder="tag1, tag2, tag3"
+                styles={{
+                  menu: (props, element) => {
+                    return {
+                      ...props,
+                      color: 'black',
+                    };
+                  },
+                }}
+                onChange={values => setInputTags(values)}
+              />
+            </span>
+          </PostSection>
+          <PostSection>
+            <span>Isso é sensível</span>
+            <input type="checkbox" onChange={() => setSensitive(b => !b)} />
+          </PostSection>
+          <PostSection>
+            <span>Atribuir postagem original</span>
+            <input type="checkbox" onChange={() => setIsAttributed(b => !b)} />
+          </PostSection>
+          {isAttributed && (
+            <PostSection>
+              <input
+                type="text"
+                placeholder="http://"
+                onChange={e => setOriginalPoster(e.target.value)}
+              />
+            </PostSection>
           )}
         </Wrapper>
       )}

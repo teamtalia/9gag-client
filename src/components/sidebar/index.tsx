@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useContext } from 'react';
 import { Dropdown } from 'antd';
 import { DashOutlined } from '@ant-design/icons';
 import { BiTrendingUp } from 'react-icons/bi';
@@ -7,12 +7,34 @@ import { HiOutlineClock } from 'react-icons/hi';
 import { MdLocationOn } from 'react-icons/md';
 
 import { Container, DropdownMenu, DropdownMenuItem } from './styles';
+import AppContext from '../../contexts/AppContext';
 
 const SideBar: React.FC = () => {
+  const {
+    feedOrder,
+    setFeedOrder,
+    setFeedRevalidate,
+    feedRevalidate,
+  } = useContext(AppContext);
+
+  const isActive = name => (name === feedOrder ? 'selected' : '');
+
+  const handleChangeOrder = useCallback(
+    (e, order) => {
+      e.preventDefault();
+      if (order === feedOrder && !feedRevalidate) {
+        setFeedRevalidate(true);
+      }
+      setFeedOrder(order);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+    [feedOrder, feedRevalidate],
+  );
+
   const Menu = (
     <DropdownMenu>
-      <DropdownMenuItem>Top Posts</DropdownMenuItem>
-      <DropdownMenuItem>Most Recent</DropdownMenuItem>
+      <DropdownMenuItem>Melhores Postagens</DropdownMenuItem>
+      <DropdownMenuItem>Mais Recentes</DropdownMenuItem>
     </DropdownMenu>
   );
 
@@ -21,25 +43,33 @@ const SideBar: React.FC = () => {
       <section>
         <ul>
           <li>
-            <a href="#" className="selected">
+            <a
+              href="#"
+              className={isActive('hot')}
+              onClick={e => handleChangeOrder(e, 'hot')}
+            >
               <FaHotjar size={16} />
               <span>Em Alta</span>
             </a>
-            <Dropdown overlay={Menu} trigger={['click']}>
+            {/* <Dropdown overlay={Menu} trigger={['click']}>
               <a className="more" href="#">
                 <DashOutlined size={16} />
               </a>
-            </Dropdown>
+            </Dropdown> */}
           </li>
-          <li>
+          {/* <li>
             <a href="#">
               <BiTrendingUp size={16} />
               <span>Tendência</span>
             </a>
-          </li>
+          </li> */}
 
           <li>
-            <a href="#">
+            <a
+              href="#"
+              className={isActive('fresh')}
+              onClick={e => handleChangeOrder(e, 'fresh')}
+            >
               <HiOutlineClock size={16} />
               <span>Recente</span>
             </a>

@@ -38,7 +38,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // const allPosts = (await api.get('/posts')).data;
 
   return {
-    fallback: 'blocking',
+    fallback: false,
     // paths: allPosts.posts.map(post => `/talia/${post.id}`),
     paths: [],
   };

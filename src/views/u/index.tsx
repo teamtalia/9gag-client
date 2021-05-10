@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-indent */
+/* eslint-disable prettier/prettier */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { Dropdown, Menu } from 'antd';
+import { Button, Dropdown, Menu, message } from 'antd';
 import { getLocationOrigin } from 'next/dist/next-server/lib/utils';
 import React, { useEffect, useState } from 'react';
 import { AiOutlineDash } from 'react-icons/ai';
@@ -22,10 +24,12 @@ import {
   TabBar,
   MoreActionsContainer,
   MoreActionsItem,
+  BlankState,
 } from './styles';
 import useFetch from '../../hooks/useFetch';
 import api from '../../services/api';
 import Feed from '../../components/feed';
+import useAuth from '../../hooks/useAuth';
 
 // import { Container } from './styles';
 interface UserViewProps {
@@ -38,29 +42,34 @@ const formatter = buildFormatter(brStrings);
 
 const UserView: React.FC<UserViewProps> = ({ user }) => {
   const [page, setPage] = useState(0);
+
+  const { user: { username } } = useAuth()
   const { data } = useFetch<{ posts: any[] }>(
     `/perfil/${user.username}/posts/${endpoints[page]}`,
     api,
     {},
   );
 
+  const isMe = username === user.username
+
   const moreOptions = () => (
     <MoreActionsContainer>
-      <MoreActionsItem key="1">Copiar link</MoreActionsItem>
+      <MoreActionsItem
+        key="1"
+        onClick={async e => {
+          await navigator.clipboard.writeText(`${getLocationOrigin()}/u/${user.username}`);
+          message.success("Copiado para áre de transferência.")
+        }}
+      >
+        Copiar link
+
+      </MoreActionsItem>
       <MoreActionsItem key="2">{`Bloquear @${user.username}`}</MoreActionsItem>
       <MoreActionsItem key="3">{`Reportar @${user.username}`}</MoreActionsItem>
     </MoreActionsContainer>
   );
 
   const activeClassHandle = id => (id === page ? 'active' : '');
-  // Feed posts;
-  // data.posts
-  useEffect(() => {
-    if (data) {
-      console.log('a pagina mudou:', page);
-      console.log('data', data);
-    }
-  }, [page, data]);
 
   return (
     <>
@@ -94,7 +103,7 @@ const UserView: React.FC<UserViewProps> = ({ user }) => {
                 </p>
               </header>
             </Header>
-            <section>My Funny Collection</section>
+            <section>{user.about}</section>
             <TabBar>
               <ul>
                 <li className={activeClassHandle(0)} onClick={e => setPage(0)}>
@@ -106,9 +115,11 @@ const UserView: React.FC<UserViewProps> = ({ user }) => {
                 <li className={activeClassHandle(2)} onClick={e => setPage(2)}>
                   Comentados
                 </li>
-                <li className={activeClassHandle(3)} onClick={e => setPage(3)}>
-                  Curtidos
-                </li>
+                {isMe && (
+                  <li className={activeClassHandle(3)} onClick={e => setPage(3)}>
+                    Curtidos
+                  </li>
+                )}
               </ul>
               <Dropdown trigger={['click']} overlay={moreOptions}>
                 <a>
@@ -116,10 +127,18 @@ const UserView: React.FC<UserViewProps> = ({ user }) => {
                 </a>
               </Dropdown>
             </TabBar>
-            {page === 0 && <Feed posts={data ? data.posts : []} />}
-            {page === 1 && <span>postagens</span>}
-            {page === 2 && <span>comentados</span>}
-            {page === 3 && <span>curtidos</span>}
+            {data && data.posts && data.posts.length ? (
+              <Feed posts={data.posts} />
+            ) : (
+                <BlankState>
+                  <h3>Nenhuma publicação para mostrar</h3>
+                  {page === 1 && isMe && (
+                    <Button type="primary">
+                      Criar Publicação
+                    </Button>
+                  )}
+                </BlankState>
+              )}
           </Wrapper>
           <Suggestions />
         </Page>

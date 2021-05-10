@@ -35,10 +35,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const allPosts = (await api.get('/posts')).data;
+  // const allPosts = (await api.get('/posts')).data;
 
   return {
-    fallback: false,
-    paths: allPosts.posts.map(post => `/talia/${post.id}`),
+    fallback: 'blocking',
+    // paths: allPosts.posts.map(post => `/talia/${post.id}`),
+    paths: [],
   };
 };

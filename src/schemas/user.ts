@@ -5,6 +5,7 @@ export default interface UserSchema {
   avatar?: FileSchema;
   email: string;
   fullname: string;
+  about?: string;
   id: string;
   username: string;
   createdAt: Date;

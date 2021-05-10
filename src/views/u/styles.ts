@@ -103,3 +103,24 @@ export const MoreActionsItem = styled(Menu.Item)`
     shade(0.08, theme.primaryColor)} !important;
   }
 `;
+
+
+export const BlankState = styled.div`
+  background-color:  ${({ theme }) => theme.isDark ? 'hsla(0,0%,100%,.1)' : '#f4f4f4'};
+  margin: 20px 0;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 2px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  width: 100%;
+  h3 {
+    font-size: 16px;
+    text-align: center;
+    font-weight: 400;
+    color: #999;
+  }
+
+`;

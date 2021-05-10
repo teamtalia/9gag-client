@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Button, Avatar, Modal } from 'antd';
+import { Button, Avatar, Modal, Dropdown, message } from 'antd';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsMoon, BsSearch } from 'react-icons/bs';
 import { BiPlusMedical } from 'react-icons/bi';
@@ -8,6 +8,8 @@ import { ThemeContext } from 'styled-components';
 import { UserOutlined } from '@ant-design/icons';
 
 import Link from 'next/link';
+import { getLocationOrigin } from 'next/dist/next-server/lib/utils';
+import { useRouter } from 'next/router';
 import AppContext from '../../contexts/AppContext';
 import useAuth from '../../hooks/useAuth';
 import Login from '../login';
@@ -20,6 +22,11 @@ import {
   NavRightContainer,
   Wrapper,
 } from './styles';
+import useFetch from '../../hooks/useFetch';
+import UserSchema from '../../schemas/user';
+import api from '../../services/api';
+import { DropdownMenu, DropdownMenuItem } from '../sidebar/styles';
+import PostSchema from '../../schemas/post';
 
 interface FakeCategories {
   name: string;
@@ -57,8 +64,14 @@ const NavBar: React.FC = () => {
     title: null,
     component: null,
   });
-  const { signed, signOut } = useAuth();
+  const { signed, signOut, user: User } = useAuth();
+  const router = useRouter();
 
+  const { data: user } = useFetch<UserSchema>(
+    User ? `/users/${User.username}` : null,
+    api,
+    {},
+  );
   const handleOpenSignUp = e => {
     e.preventDefault();
     setModalState(state => ({
@@ -111,6 +124,27 @@ const NavBar: React.FC = () => {
     await signOut();
   }
 
+  async function handleShuffle() {
+    try {
+      const { data } = await api.get<PostSchema>('/posts/shuffle');
+      router.push(`/talia/${data.id}`);
+    } catch (e) {
+      const { message: messageError } = e.response.data;
+      message.error(`Oops! ${messageError}`);
+    }
+  }
+
+  const MenuAvatar = (
+    <DropdownMenu>
+      <DropdownMenuItem>
+        <Link href={`${getLocationOrigin()}/u/${user.username}`}>
+          Meu Perfil
+        </Link>
+        <Link href="/settings">Configurações</Link>
+      </DropdownMenuItem>
+    </DropdownMenu>
+  );
+
   return (
     <Wrapper>
       <Container>
@@ -120,7 +154,7 @@ const NavBar: React.FC = () => {
         </Link>
 
         <ul>
-          <NavOption>
+          <NavOption onClick={handleShuffle}>
             <span role="img" aria-label="Shuffle">
               🔀
             </span>
@@ -172,7 +206,14 @@ const NavBar: React.FC = () => {
             {signed && (
               <>
                 <NavOption gray>
-                  <Avatar size={28} icon={<UserOutlined />} />
+                  <Dropdown overlay={MenuAvatar} trigger={['click']}>
+                    <Avatar
+                      size={28}
+                      icon={<UserOutlined />}
+                      src={user?.avatar.location}
+                    />
+                  </Dropdown>
+                  {/* xd */}
                 </NavOption>
                 <Button
                   type="primary"

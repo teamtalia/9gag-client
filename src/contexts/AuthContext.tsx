@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { createContext, useState, useEffect } from 'react';
 import {
   signIn as authSignIn,
@@ -12,11 +13,13 @@ import {
 import api from '../services/api';
 import useLocalStorage from '../hooks/useLocalStorage';
 import FullLoading from '../components/fullloading';
+import useFetch from '../hooks/useFetch';
 
 interface UserProps {
   id: string;
   email: string;
   fullname: string;
+  username: string;
 }
 export interface AuthContextProps {
   signed: boolean;
@@ -31,6 +34,7 @@ export interface AuthContextProps {
     arg0: PasswordResetProps,
   ): Promise<{ error: string | undefined; message: string | undefined }>;
   signOut(): Promise<boolean>;
+  revalidateUser(): Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
@@ -38,11 +42,15 @@ const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
 export const AuthContextProvider: React.FC = ({ children }) => {
   const [storageUser, setStorageUser] = useLocalStorage('user', null);
   const [storageToken, setStorageToken] = useLocalStorage('token', null);
-
   const [error, setError] = useState<string | null>(null);
   const [user, setUser] = useState<UserProps | null>(null);
   const [loading, setLoading] = useState(true);
   const [pending, setPeding] = useState(false);
+  const { data: userFetch, mutate } = useFetch(
+    user ? `/users/me` : null,
+    api,
+    {},
+  );
 
   useEffect(() => {
     if (!!storageUser && !!storageToken) {
@@ -81,6 +89,16 @@ export const AuthContextProvider: React.FC = ({ children }) => {
     api.defaults.headers.Authorization = '';
     // return isRemovedToken && isRemovedUser;
     return true;
+  }
+
+  useEffect(() => {
+    if (userFetch) {
+      setUser(userFetch as UserProps);
+    }
+  }, [userFetch]);
+
+  async function revalidateUser() {
+    mutate(data => data, true);
   }
 
   async function signUp({
@@ -153,6 +171,7 @@ export const AuthContextProvider: React.FC = ({ children }) => {
         resetPassword,
         pending,
         token: storageToken,
+        revalidateUser,
       }}
     >
       {children}

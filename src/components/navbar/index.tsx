@@ -137,7 +137,7 @@ const NavBar: React.FC = () => {
   const MenuAvatar = (
     <DropdownMenu>
       <DropdownMenuItem>
-        <Link href={`${getLocationOrigin()}/u/${user.username}`}>
+        <Link href={`${getLocationOrigin()}/u/${user?.username}`}>
           Meu Perfil
         </Link>
         <Link href="/settings">Configurações</Link>

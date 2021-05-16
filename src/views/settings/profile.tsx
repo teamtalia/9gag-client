@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { UploadOutlined, UserOutlined } from '@ant-design/icons';
 import { UploadProps } from 'antd/lib/upload';
 import { UploadFile } from 'antd/lib/upload/interface';
+import { mutate } from 'swr';
 import { Container, Page } from '../../components/layout';
 import NavBar from '../../components/navbar';
 import SideBar from '../../components/sidebar';
@@ -86,6 +87,7 @@ const ProfileView: React.FC = () => {
         ...values,
         fileId: uploadImage ? uploadImage.response.id : null,
       });
+      mutate(`/users/${user.username}`, u => u, true);
       // fazer o upload das infos
       message.success('Informações atualizadas com sucesso!');
     } catch (e) {
@@ -102,8 +104,6 @@ const ProfileView: React.FC = () => {
   if (!user || !data) {
     return <div />;
   }
-
-  console.log(data.about);
 
   return (
     <>
@@ -145,7 +145,7 @@ const ProfileView: React.FC = () => {
                 <Form.Item
                   name="fullname"
                   label="Nome de exibição"
-                  initialValue={user.fullname}
+                  initialValue={data.fullname}
                   required
                   requiredMark="optional"
                 >

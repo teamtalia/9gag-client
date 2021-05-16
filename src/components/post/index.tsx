@@ -40,6 +40,11 @@ const Post: React.FC<PostProps> = ({ post }) => {
   const { user, signed } = useContext(AuthContext);
   const { feedOrder } = useContext(AppContext);
 
+  const tags = useMemo(
+    () => (post.tags && post.tags.map(tag => tag.name)) || [],
+    [post],
+  );
+
   const points = useMemo(
     () => post.votes?.reduce((old, current) => old + current.voted, 0) || 0,
     [post],
@@ -85,7 +90,9 @@ const Post: React.FC<PostProps> = ({ post }) => {
       <PostHeader>
         <section>
           <span />
-          <span>WTF</span>
+          {tags.map(tag => (
+            <span>{tag}</span>
+          ))}
           <span>
             <TimeAgo date={post.createdAt} formatter={formatter} />
           </span>

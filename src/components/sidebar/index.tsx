@@ -7,6 +7,7 @@ import { HiOutlineClock } from 'react-icons/hi';
 import { MdLocationOn } from 'react-icons/md';
 
 import Avatar from 'antd/lib/avatar/avatar';
+import Link from 'next/link';
 import { Container, DropdownMenu, DropdownMenuItem } from './styles';
 import AppContext from '../../contexts/AppContext';
 import useFetch from '../../hooks/useFetch';
@@ -105,13 +106,15 @@ const SideBar: React.FC = () => {
         <ul>
           <li>
             {categories.map(category => (
-              <a href="#">
-                <Avatar
-                  size={28}
-                  src={`/images/categories-icons/${category.slug}.svg`}
-                />
-                <span>{category.name}</span>
-              </a>
+              <Link href={`/category/${category.slug}`} passHref>
+                <a>
+                  <Avatar
+                    size={28}
+                    src={`/images/categories-icons/${category.slug}.svg`}
+                  />
+                  <span>{category.name}</span>
+                </a>
+              </Link>
             ))}
           </li>
         </ul>

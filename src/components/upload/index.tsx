@@ -68,11 +68,11 @@ const Upload: React.FC<UploadProps> = ({
   function beforeUpload(file, FileList): boolean {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
     if (!isJpgOrPng) {
-      message.error('You can only upload JPG/PNG file!!');
+      message.error('você só pode fazer upload de arquivos JPG / PNG !!');
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
-      message.error('Image must smaller than 2MB!');
+      message.error('A imagem deve ter menos de 2 MB!');
     }
     setInUpload(isJpgOrPng && isLt2M);
     return isJpgOrPng && isLt2M;
@@ -80,7 +80,7 @@ const Upload: React.FC<UploadProps> = ({
 
   const handleUpload = async () => {
     if (typeof inputTags === 'undefined' || !inputTags.length) {
-      message.error('The post must contain at least one tag');
+      message.error('A postagem deve conter pelo menos uma tag');
       return;
     }
     if (!uploadImage) return;
@@ -104,7 +104,6 @@ const Upload: React.FC<UploadProps> = ({
       mutate(
         '/posts',
         posts => {
-          console.log(posts);
           const newPosts = [...(posts?.posts || []), newPost];
           return { posts: newPosts };
         },
@@ -260,10 +259,18 @@ const Upload: React.FC<UploadProps> = ({
           )}
           {!inUpload && (
             <Row>
-              <UploadSection onClick={e => setStage(1)}>
-                <IoMdImage size={42} />
-                <span>Colar URL da imagem</span>
-              </UploadSection>
+              <Popover
+                content={<div>indisponível no momento.</div>}
+                style={{
+                  backgroundColor: theme.primaryColor,
+                  color: theme.primaryTextColor,
+                }}
+              >
+                <UploadSection>
+                  <IoMdImage size={42} />
+                  <span>Colar URL da imagem</span>
+                </UploadSection>
+              </Popover>
               <Popover
                 content={<div>Disponivel no iOS &#38; Android apenas.</div>}
                 style={{

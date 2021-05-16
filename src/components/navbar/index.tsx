@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { Button, Avatar, Modal, Dropdown, message } from 'antd';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsMoon, BsSearch } from 'react-icons/bs';
@@ -56,6 +56,21 @@ export interface ModalStateProps {
   component: any;
 }
 
+type CategoriesData = {
+  id: string;
+  name: string;
+  slug: string;
+  posts: number;
+  tags: {
+    name: string;
+    id: string;
+    slug: string;
+  }[];
+};
+interface CategoriesPayload {
+  categories: CategoriesData[];
+}
+
 const NavBar: React.FC = () => {
   const theme = useContext(ThemeContext);
   const { setTheme } = useContext(AppContext);
@@ -72,6 +87,24 @@ const NavBar: React.FC = () => {
     api,
     {},
   );
+
+  const { data: dataCategories } = useFetch<CategoriesPayload>(
+    '/categories',
+    api,
+    {},
+  );
+
+  const tags = useMemo(() => {
+    if (dataCategories && dataCategories.categories) {
+      const featured = dataCategories.categories.slice(0, 2);
+      return featured.reduce(
+        (prev, curr) => [...prev, ...(curr.tags?.slice(0, 2) || [])],
+        [],
+      );
+    }
+    return [];
+  }, [dataCategories]);
+
   const handleOpenSignUp = e => {
     e.preventDefault();
     setModalState(state => ({
@@ -166,20 +199,9 @@ const NavBar: React.FC = () => {
             </span>
             Baixe o App
           </NavOption>
-          <NavOption>
-            <span role="img" aria-label="Mobile App">
-              🛒
-            </span>
-            Loja
-          </NavOption>
-          {categories.map(category => (
-            <NavOption key={category.name} notify={category.notify}>
-              {category.icon && (
-                <span role="img" aria-label="Mobile App">
-                  {category.icon}
-                </span>
-              )}
-              {category.name}
+          {tags.map(tag => (
+            <NavOption key={tag.name} notify={false}>
+              {tag.name}
             </NavOption>
           ))}
           <NavRightContainer>
@@ -210,7 +232,7 @@ const NavBar: React.FC = () => {
                     <Avatar
                       size={28}
                       icon={<UserOutlined />}
-                      src={user?.avatar.location}
+                      src={user?.avatar?.location}
                     />
                   </Dropdown>
                   {/* xd */}

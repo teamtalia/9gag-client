@@ -41,13 +41,13 @@ const Post: React.FC<PostProps> = ({ post }) => {
   const { feedOrder } = useContext(AppContext);
 
   const points = useMemo(
-    () => post.votes.reduce((old, current) => old + current.voted, 0),
+    () => post.votes?.reduce((old, current) => old + current.voted, 0) || 0,
     [post],
   );
 
   const Upvoted = useMemo(() => {
     if (signed) {
-      if (post.votes.find(el => el.user.id === user.id && el.voted === 1)) {
+      if (post.votes?.find(el => el.user.id === user.id && el.voted === 1)) {
         return true;
       }
     }
@@ -56,7 +56,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
 
   const Dowvoted = useMemo(() => {
     if (signed) {
-      if (post.votes.find(el => el.user.id === user.id && el.voted === -1)) {
+      if (post.votes?.find(el => el.user.id === user.id && el.voted === -1)) {
         return true;
       }
     }
@@ -64,15 +64,19 @@ const Post: React.FC<PostProps> = ({ post }) => {
   }, [post, signed, user]);
 
   const handleVote = async (element, vote) => {
-    try {
-      await api.post(`/posts/vote`, {
-        postId: post.id,
-        vote,
-      });
-      await mutate(`/posts?order=${feedOrder}`, data => data, true);
-      element.target.blur();
-    } catch (e) {
-      if (e.message) message.error(e.message);
+    if (signed) {
+      try {
+        await api.post(`/posts/vote`, {
+          postId: post.id,
+          vote,
+        });
+        await mutate(`/posts?order=${feedOrder}`, data => data, true);
+        element.target.blur();
+      } catch (e) {
+        if (e.message) message.error(e.message);
+      }
+    } else {
+      message.info('Você deve se autenticar primeiro.');
     }
   };
 

@@ -1,15 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   CameraFilled,
-  CameraOutlined,
   CloseOutlined,
   LoadingOutlined,
-  SmileFilled,
   SmileOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import { Avatar, Button, message, Upload } from 'antd';
-import { mutate } from 'swr';
 
 import { UploadFile } from 'antd/lib/upload/interface';
 import { AiOutlineLoading } from 'react-icons/ai';
@@ -24,6 +21,8 @@ import {
   AttachmentContainer,
   FooterButton,
 } from './styles';
+import useFetch from '../../hooks/useFetch';
+import UserSchema from '../../schemas/user';
 
 interface DoCommentProps {
   post: PostInterface;
@@ -40,12 +39,17 @@ const DoComment: React.FC<DoCommentProps> = ({
   comment,
   reply = false,
 }) => {
-  const { token } = useAuth();
+  const { token, user: User } = useAuth();
+  const { data: user } = useFetch<UserSchema>(
+    User ? `/users/${User.username}` : null,
+    api,
+    {},
+  );
 
   const [inUpload, setInUpload] = useState(false);
   const [uploadImage, setUploadImage] = useState<UploadFile>(null);
   const [stage, setStage] = useState(0);
-  const [text, setText] = useState(reply ? `@${comment.user.fullname} ` : '');
+  const [text, setText] = useState(reply ? `@${comment.user.username} ` : '');
   const [link, setLink] = useState('');
   const commentInputRef = useRef<HTMLTextAreaElement>(null);
   const [pending, setPending] = useState(false);
@@ -69,7 +73,6 @@ const DoComment: React.FC<DoCommentProps> = ({
     if (stage === 1 && link === '') {
       message.error('Você deve informar um link');
       setPending(false);
-      // validar o link
       return;
     }
     let fileId = uploadImage ? uploadImage.response.id : null;
@@ -185,7 +188,11 @@ const DoComment: React.FC<DoCommentProps> = ({
   return (
     <Container>
       <section>
-        <Avatar size={64} icon={<UserOutlined />} />
+        <Avatar
+          size={64}
+          src={user?.avatar?.location}
+          icon={<UserOutlined />}
+        />
       </section>
       <section style={{ flex: 1 }}>
         <header>

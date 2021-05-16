@@ -17,6 +17,7 @@ import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
 import { Dropdown, message } from 'antd';
 
 import { getLocationOrigin } from 'next/dist/next-server/lib/utils';
+import Link from 'next/link';
 import CommentSchema from '../../schemas/comment';
 import {
   Container,
@@ -131,7 +132,7 @@ const Comment: React.FC<CommentProps> = ({
       >
         Copiar link
       </DropdownMenuItem>
-      {user.id === comment.user.id && (
+      {user?.id === comment.user.id && (
         <DropdownMenuItem onClick={handleRemoveComment}>
           Deletar comentário
         </DropdownMenuItem>
@@ -143,7 +144,6 @@ const Comment: React.FC<CommentProps> = ({
     if (toOpen) {
       const inChilds = comment.replies.find(reply => reply.id === toOpen);
       if (inChilds) {
-        console.log();
         setShowReplies(true);
       } else if (comment.id === toOpen) {
         if (containerRef.current) {
@@ -152,16 +152,21 @@ const Comment: React.FC<CommentProps> = ({
       }
     }
   }, []);
-
   return (
     <Container ref={containerRef}>
       <CommentWrapper>
         <CommentAvatar>
-          <Avatar size={64} icon={<UserOutlined />} />
+          <Avatar
+            size={64}
+            src={comment.user?.avatar?.location}
+            icon={<UserOutlined />}
+          />
         </CommentAvatar>
         <CommentContainer>
           <header>
-            <a href="#/u/user">{comment.user.fullname}</a>
+            <Link href={`/u/${comment.user.username}`} passHref>
+              <a>{`@${comment.user.username}`}</a>
+            </Link>
             <a href="#">
               <TimeAgo date={comment.createdAt} formatter={formatter} />
             </a>

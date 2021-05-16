@@ -104,7 +104,8 @@ const Upload: React.FC<UploadProps> = ({
       mutate(
         '/posts',
         posts => {
-          const newPosts = [...posts.posts, newPost];
+          console.log(posts);
+          const newPosts = [...(posts?.posts || []), newPost];
           return { posts: newPosts };
         },
         true,

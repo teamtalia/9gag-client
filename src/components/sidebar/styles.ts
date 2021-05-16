@@ -1,10 +1,12 @@
 /* eslint-disable prettier/prettier */
 import { Menu } from 'antd';
-import { shade } from 'polished';
+import { lighten, shade } from 'polished';
 import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 192px;
+  display:flex;
+  flex-direction:column;
   height: calc(100% - 48px);
   position: fixed;
   z-index: 1;
@@ -13,6 +15,27 @@ export const Container = styled.div`
   padding-top: 48px;
   header h3 {
     color: ${({ theme }) => shade(0.2, theme.primaryTextColor)};
+  }
+  section:nth-of-type(2) {
+    display:flex;
+    flex:1;
+    overflow-y:scroll;
+    &::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: ${({ theme }) => theme.isDark ? '#c0c0' : '#d1d1d1'};
+      border-radius: 11px;
+    }
+    &::-webkit-scrollbar-thumb:hover{
+      background: ${({ theme }) => theme.isDark ? '#999' : '#807d80'};
+    }
+    &::-webkit-scrollbar-track{
+      background: ${({ theme }) => theme.isDark ? '#111' : '#d1d1d1'};
+      border-radius: 4px;
+    }
+   
   }
 
   ul {

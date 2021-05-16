@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons';
 import { Dropdown } from 'antd';
 import { getLocationOrigin } from 'next/dist/next-server/lib/utils';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { mutate } from 'swr';
 import useFetch from '../../hooks/useFetch';
 import api from '../../services/api';
@@ -23,6 +23,8 @@ import {
   PostContainer,
   CommentsHeader,
 } from './styles';
+import { VoteSchema } from '../../schemas/post';
+import AuthContext from '../../contexts/AuthContext';
 
 export interface PostInterface {
   tags: any[];
@@ -35,6 +37,7 @@ export interface PostInterface {
     location: string;
   };
   description: string;
+  votes?: VoteSchema[];
 }
 
 interface HashProps {
@@ -51,11 +54,35 @@ interface CommentsReponse {
 const Post: React.FC<PostProps> = ({ post, reason }) => {
   const [order, setOrder] = useState<'hot' | 'fresh'>('hot');
 
+  const { user, signed } = useContext(AuthContext);
+
   const { data: commentData } = useFetch<CommentsReponse>(
     `/posts/${post.id}/comments?order=${order}`,
     api,
     {},
   );
+
+  const points = useMemo(
+    () => post.votes?.reduce((old, current) => old + current.voted, 0) || 0,
+    [post],
+  );
+  const Upvoted = useMemo(() => {
+    if (signed) {
+      if (post.votes?.find(el => el.user.id === user.id && el.voted === 1)) {
+        return true;
+      }
+    }
+    return false;
+  }, [post, signed, user]);
+
+  const Dowvoted = useMemo(() => {
+    if (signed) {
+      if (post.votes?.find(el => el.user.id === user.id && el.voted === -1)) {
+        return true;
+      }
+    }
+    return false;
+  }, [post, signed, user]);
 
   const [commentToOpen, setCommentToOpen] = useState<string>(null);
 
@@ -86,15 +113,15 @@ const Post: React.FC<PostProps> = ({ post, reason }) => {
       <Header>
         <h1>{post.description}</h1>
         <p>
-          <a href="#">0 Pontos</a>
+          <a href="#">{`${points} Pontos`}</a>
           {' · '}
           <a href="#">{`${post.comments.length} Comentários`}</a>
         </p>
       </Header>
       <PostInteractions>
         <section>
-          <InteractionButton icon={<UpOutlined />} />
-          <InteractionButton icon={<DownOutlined />} />
+          <InteractionButton icon={<UpOutlined />} active={Upvoted} />
+          <InteractionButton icon={<DownOutlined />} active={Dowvoted} />
           <FacebookButton
             icon={<FacebookFilled />}
             onClick={() => {

@@ -130,7 +130,7 @@ const ProfileView: React.FC = () => {
                       src={
                         uploadImage
                           ? uploadImage.response.location
-                          : data?.avatar.location
+                          : data?.avatar?.location
                       }
                     />
                     <div>

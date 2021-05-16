@@ -64,8 +64,11 @@ export const PostInteractions = styled.div`
     }
   }
 `;
+interface InteractionButtonProps {
+  active?: boolean;
+};
 
-export const InteractionButton = styled(Button)`
+export const InteractionButton = styled(Button) <InteractionButtonProps>`
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 2px;
@@ -75,11 +78,11 @@ export const InteractionButton = styled(Button)`
   position: relative;
   background-color: transparent !important;
   outline: 0 !important;
-  color: ${({ theme }) => theme.primaryTextColor};
+  color: ${({ theme, active }) => active ? '#09fc' : theme.primaryTextColor};
   margin: 0 4px;
   &:hover,
   &:focus {
-    color: ${({ theme }) => theme.primaryTextColor};
+    color: ${({ theme, active }) => active ? '#09fc' : theme.primaryTextColor};
     border-color: ${({ theme }) => shade(0.6, theme.primaryTextColor)};
   }
 `;

@@ -15,7 +15,6 @@ const User: React.FC = () => {
     api,
     {},
   );
-  useEffect(() => console.log('alo', user), [user]);
   if (!user) {
     return <div />; // loading
   }

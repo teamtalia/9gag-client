@@ -20,11 +20,9 @@ const Index: React.FC = () => {
   );
   useEffect(() => {
     if (feedRevalidate && postData) {
-      console.log('mostra o revalidando');
       setFeedRevalidate(false);
       (async () => {
         await mutate(data => data, true);
-        console.log('some o revalidado');
       })();
     }
   }, [feedRevalidate, postData]);

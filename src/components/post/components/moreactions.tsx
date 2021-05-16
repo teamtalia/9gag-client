@@ -33,36 +33,6 @@ const MoreActions: React.FC<MoreActionsProps> = ({ post }) => {
         }
       },
     },
-    {
-      id: '1',
-      label: 'E-mail',
-      action: () => { },
-    },
-    {
-      id: '2',
-      label: 'Twitter',
-      action: () => { },
-    },
-    {
-      id: '3',
-      label: 'Baixar',
-      action: () => { },
-    },
-    {
-      id: '4',
-      label: "Eu não gostei disso",
-      action: () => { },
-    },
-    {
-      id: '5',
-      label: "Eu vi isso",
-      action: () => { },
-    },
-    {
-      id: '6',
-      label: 'Reportar',
-      action: () => { },
-    },
   ];
 
   function handleAction(e, action) {

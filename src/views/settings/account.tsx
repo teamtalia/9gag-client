@@ -91,7 +91,7 @@ const AccountView: React.FC = () => {
                 </Form.Item>
                 <span>O e-mail não será exibido publicamente</span>
                 <div style={{ marginTop: '25px' }} />
-                <Form.Item
+                {/* <Form.Item
                   name="mask_sensitive"
                   label="Máscara de conteúdo sensível"
                   initialValue={1}
@@ -111,7 +111,7 @@ const AccountView: React.FC = () => {
                     <Option value={1}>Sim</Option>
                     <Option value={0}>Não</Option>
                   </Select>
-                </Form.Item>
+                </Form.Item> */}
 
                 <footer>
                   <Button type="primary" htmlType="submit">

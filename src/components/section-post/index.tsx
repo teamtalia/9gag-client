@@ -4,7 +4,7 @@ import {
   DashOutlined,
   FacebookFilled,
 } from '@ant-design/icons';
-import { Dropdown } from 'antd';
+import { Dropdown, message } from 'antd';
 import { getLocationOrigin } from 'next/dist/next-server/lib/utils';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { mutate } from 'swr';
@@ -108,6 +108,23 @@ const Post: React.FC<PostProps> = ({ post, reason }) => {
     }
   }, []);
 
+  const handleVote = async (element, vote) => {
+    if (signed) {
+      try {
+        await api.post(`/posts/vote`, {
+          postId: post.id,
+          vote,
+        });
+        afterComment();
+        element.target.blur();
+      } catch (e) {
+        if (e.message) message.error(e.message);
+      }
+    } else {
+      message.info('Você deve se autenticar primeiro.');
+    }
+  };
+
   return (
     <Container>
       <Header>
@@ -120,8 +137,16 @@ const Post: React.FC<PostProps> = ({ post, reason }) => {
       </Header>
       <PostInteractions>
         <section>
-          <InteractionButton icon={<UpOutlined />} active={Upvoted} />
-          <InteractionButton icon={<DownOutlined />} active={Dowvoted} />
+          <InteractionButton
+            icon={<UpOutlined />}
+            active={Upvoted}
+            onClick={e => handleVote(e, 1)}
+          />
+          <InteractionButton
+            icon={<DownOutlined />}
+            active={Dowvoted}
+            onClick={e => handleVote(e, -1)}
+          />
           <FacebookButton
             icon={<FacebookFilled />}
             onClick={() => {
